@@ -1,0 +1,626 @@
+# quizzes/collocations-trainer-100.toml
+
+title   = "Prepositions & idioms (100+)"
+section = "Collocations"
+kind    = "text"
+intro   = "Впиши правильний прийменник (або сполуку) у кожне речення. Деякі дієслова йдуть без прийменника - тоді впиши -."
+
+[[question]]
+id      = 1
+group   = "Verb + preposition"
+prompt  = "The minister refused to comment ___ the rumours."
+explain = "comment <b class=\"ans\">on</b> sth = коментувати."
+answers = ["on"]
+
+[[question]]
+id      = 2
+prompt  = "She insisted ___ seeing the manager at once."
+explain = "insist <b class=\"ans\">on</b> (doing) = наполягати на."
+answers = ["on"]
+
+[[question]]
+id      = 3
+prompt  = "With no options left, they resorted ___ violence."
+explain = "resort <b class=\"ans\">to</b> sth = вдатися до (крайнього)."
+answers = ["to"]
+
+[[question]]
+id      = 4
+prompt  = "Passengers must refrain ___ smoking on board."
+explain = "refrain <b class=\"ans\">from</b> doing = утриматися від."
+answers = ["from"]
+
+[[question]]
+id      = 5
+prompt  = "The prisoners were deprived ___ sleep for days."
+explain = "deprive sb <b class=\"ans\">of</b> sth = позбавити чогось."
+answers = ["of"]
+
+[[question]]
+id      = 6
+prompt  = "He was convicted ___ fraud last year."
+explain = "convict sb <b class=\"ans\">of</b> a crime. (пор. accuse of, charge with)"
+answers = ["of"]
+
+[[question]]
+id      = 7
+prompt  = "High fees deter students ___ applying."
+explain = "deter sb <b class=\"ans\">from</b> doing = відлякувати від."
+answers = ["from"]
+
+[[question]]
+id      = 8
+prompt  = "She abstained ___ alcohol during training."
+explain = "abstain <b class=\"ans\">from</b> = утримуватися від."
+answers = ["from"]
+
+[[question]]
+id      = 9
+prompt  = "Someone had tampered ___ the evidence."
+explain = "tamper <b class=\"ans\">with</b> = підробляти/чіпати незаконно."
+answers = ["with"]
+
+[[question]]
+id      = 10
+prompt  = "The whole problem stems ___ poor planning."
+explain = "stem <b class=\"ans\">from</b> = випливати/бути наслідком."
+answers = ["from"]
+
+[[question]]
+id      = 11
+prompt  = "The outcome hinges ___ tomorrow’s vote."
+explain = "hinge <b class=\"ans\">on</b> = цілком залежати від."
+answers = ["on", "upon"]
+
+[[question]]
+id      = 12
+prompt  = "His sarcasm borders ___ open rudeness."
+explain = "border <b class=\"ans\">on</b> = межувати з, бути близьким до."
+answers = ["on", "upon"]
+
+[[question]]
+id      = 13
+prompt  = "The festival culminated ___ a huge fireworks show."
+explain = "culminate <b class=\"ans\">in</b> = завершитися (кульмінацією)."
+answers = ["in"]
+
+[[question]]
+id      = 14
+prompt  = "After university she embarked ___ a legal career."
+explain = "embark <b class=\"ans\">on</b> = розпочати (щось значне)."
+answers = ["on", "upon"]
+
+[[question]]
+id      = 15
+prompt  = "They capitalized ___ their rival’s mistake."
+explain = "capitalize <b class=\"ans\">on</b> = скористатися (вигодою)."
+answers = ["on", "upon"]
+
+[[question]]
+id      = 16
+prompt  = "The board is grappling ___ a funding crisis."
+explain = "grapple <b class=\"ans\">with</b> = боротися з (проблемою)."
+answers = ["with"]
+
+[[question]]
+id      = 17
+prompt  = "All staff must adhere ___ the safety rules."
+explain = "adhere <b class=\"ans\">to</b> = дотримуватися."
+answers = ["to"]
+
+[[question]]
+id      = 18
+prompt  = "I simply don’t subscribe ___ that theory."
+explain = "subscribe <b class=\"ans\">to</b> an idea = поділяти (думку)."
+answers = ["to"]
+
+[[question]]
+id      = 19
+prompt  = "Every firm must comply ___ the regulations."
+explain = "comply <b class=\"ans\">with</b> = дотримуватися (правил)."
+answers = ["with"]
+
+[[question]]
+id      = 20
+prompt  = "The device must conform ___ EU standards."
+explain = "conform <b class=\"ans\">to/with</b> = відповідати (нормам)."
+answers = ["to", "with"]
+
+[[question]]
+id      = 21
+prompt  = "In his speech he alluded ___ an old scandal."
+explain = "allude <b class=\"ans\">to</b> = натякати на."
+answers = ["to"]
+
+[[question]]
+id      = 22
+prompt  = "The damages amount ___ over a million."
+explain = "amount <b class=\"ans\">to</b> = складати/дорівнювати."
+answers = ["to"]
+
+[[question]]
+id      = 23
+prompt  = "Exports account ___ most of the profit."
+explain = "account <b class=\"ans\">for</b> = становити/пояснювати."
+answers = ["for"]
+
+[[question]]
+id      = 24
+prompt  = "The resort caters ___ wealthy tourists."
+explain = "cater <b class=\"ans\">for/to</b> = обслуговувати/догоджати."
+answers = ["for", "to"]
+
+[[question]]
+id      = 25
+prompt  = "The clinic specializes ___ sports injuries."
+explain = "specialize <b class=\"ans\">in</b> = спеціалізуватися на."
+answers = ["in"]
+
+[[question]]
+id      = 26
+prompt  = "On holiday they indulged ___ fine dining."
+explain = "indulge <b class=\"ans\">in</b> = дозволяти собі (насолоду)."
+answers = ["in"]
+
+[[question]]
+id      = 27
+prompt  = "Everyone benefits ___ regular exercise."
+explain = "benefit <b class=\"ans\">from</b> = мати користь з."
+answers = ["from"]
+
+[[question]]
+id      = 28
+prompt  = "He is still recovering ___ major surgery."
+explain = "recover <b class=\"ans\">from</b> = одужувати після."
+answers = ["from"]
+
+[[question]]
+id      = 29
+prompt  = "How do you cope ___ so much stress?"
+explain = "cope <b class=\"ans\">with</b> = давати раду."
+answers = ["with"]
+
+[[question]]
+id      = 30
+prompt  = "The launch coincided ___ the holidays."
+explain = "coincide <b class=\"ans\">with</b> = збігатися в часі з."
+answers = ["with"]
+
+[[question]]
+id      = 31
+group   = "Adjective + preposition"
+prompt  = "Were you fully aware ___ the risks involved?"
+explain = "aware <b class=\"ans\">of</b> = обізнаний про."
+answers = ["of"]
+
+[[question]]
+id      = 32
+prompt  = "She is more than capable ___ handling it."
+explain = "capable <b class=\"ans\">of</b> = здатний на."
+answers = ["of"]
+
+[[question]]
+id      = 33
+prompt  = "He’s very keen ___ mountain biking."
+explain = "keen <b class=\"ans\">on</b> = захоплений/охочий до."
+answers = ["on"]
+
+[[question]]
+id      = 34
+prompt  = "They are extremely fond ___ old jazz."
+explain = "fond <b class=\"ans\">of</b> = любить, прихильний до."
+answers = ["of"]
+
+[[question]]
+id      = 35
+prompt  = "Teenagers are prone ___ mood swings."
+explain = "prone <b class=\"ans\">to</b> = схильний до (поганого)."
+answers = ["to"]
+
+[[question]]
+id      = 36
+prompt  = "Young children are susceptible ___ infections."
+explain = "susceptible <b class=\"ans\">to</b> = вразливий до."
+answers = ["to"]
+
+[[question]]
+id      = 37
+prompt  = "Nobody is immune ___ harsh criticism."
+explain = "immune <b class=\"ans\">to</b> = несприйнятливий до."
+answers = ["to", "from"]
+
+[[question]]
+id      = 38
+prompt  = "She seemed oblivious ___ the danger."
+explain = "oblivious <b class=\"ans\">to</b> = не помічає, не свідомий."
+answers = ["to", "of"]
+
+[[question]]
+id      = 39
+prompt  = "The noise is not conducive ___ concentration."
+explain = "conducive <b class=\"ans\">to</b> = сприятливий для."
+answers = ["to"]
+
+[[question]]
+id      = 40
+prompt  = "His name is synonymous ___ luxury."
+explain = "synonymous <b class=\"ans\">with</b> = синонім/уособлення."
+answers = ["with"]
+
+[[question]]
+id      = 41
+prompt  = "Is this charger compatible ___ my phone?"
+explain = "compatible <b class=\"ans\">with</b> = сумісний з."
+answers = ["with"]
+
+[[question]]
+id      = 42
+prompt  = "The scent was reminiscent ___ fresh rain."
+explain = "reminiscent <b class=\"ans\">of</b> = нагадує про."
+answers = ["of"]
+
+[[question]]
+id      = 43
+prompt  = "The flat was completely devoid ___ charm."
+explain = "devoid <b class=\"ans\">of</b> = позбавлений чогось."
+answers = ["of"]
+
+[[question]]
+id      = 44
+prompt  = "I’m not averse ___ a bit of a challenge."
+explain = "averse <b class=\"ans\">to</b> = проти, не схильний до."
+answers = ["to"]
+
+[[question]]
+id      = 45
+prompt  = "Be wary ___ deals that seem too good."
+explain = "wary <b class=\"ans\">of</b> = насторожений щодо."
+answers = ["of"]
+
+[[question]]
+id      = 46
+prompt  = "She grew envious ___ her sister’s success."
+explain = "envious <b class=\"ans\">of</b> = заздрісний до."
+answers = ["of"]
+
+[[question]]
+id      = 47
+prompt  = "That junction is notorious ___ crashes."
+explain = "notorious <b class=\"ans\">for</b> = сумно відомий чим."
+answers = ["for"]
+
+[[question]]
+id      = 48
+prompt  = "The region is renowned ___ its wines."
+explain = "renowned <b class=\"ans\">for</b> = славиться чим."
+answers = ["for"]
+
+[[question]]
+id      = 49
+prompt  = "Are part-time staff eligible ___ the bonus?"
+explain = "eligible <b class=\"ans\">for</b> = має право на."
+answers = ["for"]
+
+[[question]]
+id      = 50
+prompt  = "Children’s books are exempt ___ VAT."
+explain = "exempt <b class=\"ans\">from</b> = звільнений від."
+answers = ["from"]
+
+[[question]]
+id      = 51
+prompt  = "He was clearly intent ___ winning at all costs."
+explain = "intent <b class=\"ans\">on</b> (doing) = сповнений рішучості."
+answers = ["on"]
+
+[[question]]
+id      = 52
+prompt  = "She is remarkably adept ___ negotiation."
+explain = "adept <b class=\"ans\">at</b> = вправний у."
+answers = ["at"]
+
+[[question]]
+id      = 53
+prompt  = "The professor is well versed ___ tax law."
+explain = "versed <b class=\"ans\">in</b> = обізнаний/досвідчений у."
+answers = ["in"]
+
+[[question]]
+id      = 54
+prompt  = "The diet was found deficient ___ iron."
+explain = "deficient <b class=\"ans\">in</b> = з нестачею чогось."
+answers = ["in"]
+
+[[question]]
+id      = 55
+prompt  = "I’m quite accustomed ___ long shifts now."
+explain = "accustomed <b class=\"ans\">to</b> = звиклий до (далі -ing/іменник)."
+answers = ["to"]
+
+[[question]]
+id      = 56
+group   = "Noun + preposition"
+prompt  = "There has been a sharp increase ___ fuel prices."
+explain = "an increase <b class=\"ans\">in</b> = зростання чогось."
+answers = ["in"]
+
+[[question]]
+id      = 57
+prompt  = "There’s no simple solution ___ this crisis."
+explain = "a solution <b class=\"ans\">to</b> a problem."
+answers = ["to"]
+
+[[question]]
+id      = 58
+prompt  = "Is there a cheaper alternative ___ plastic?"
+explain = "an alternative <b class=\"ans\">to</b> = заміна чомусь."
+answers = ["to"]
+
+[[question]]
+id      = 59
+prompt  = "What was the real reason ___ the delay?"
+explain = "a reason <b class=\"ans\">for</b> sth."
+answers = ["for"]
+
+[[question]]
+id      = 60
+prompt  = "The ruling had a huge impact ___ the market."
+explain = "an impact <b class=\"ans\">on</b> = вплив на."
+answers = ["on", "upon"]
+
+[[question]]
+id      = 61
+prompt  = "There is growing demand ___ skilled nurses."
+explain = "demand <b class=\"ans\">for</b> = попит на."
+answers = ["for"]
+
+[[question]]
+id      = 62
+prompt  = "The case collapsed for a lack ___ evidence."
+explain = "a lack <b class=\"ans\">of</b> = брак чогось (іменник)."
+answers = ["of"]
+
+[[question]]
+id      = 63
+prompt  = "The memoir offers real insight ___ his mind."
+explain = "insight <b class=\"ans\">into</b> = розуміння/проникнення в."
+answers = ["into"]
+
+[[question]]
+id      = 64
+prompt  = "The council imposed a ban ___ fireworks."
+explain = "a ban <b class=\"ans\">on</b> = заборона на."
+answers = ["on"]
+
+[[question]]
+id      = 65
+prompt  = "The school places great emphasis ___ sport."
+explain = "emphasis <b class=\"ans\">on</b> = наголос на."
+answers = ["on", "upon"]
+
+[[question]]
+id      = 66
+prompt  = "Pollution is a serious threat ___ wildlife."
+explain = "a threat <b class=\"ans\">to</b> = загроза чому."
+answers = ["to"]
+
+[[question]]
+id      = 67
+prompt  = "There is no substitute ___ hard work."
+explain = "a substitute <b class=\"ans\">for</b> = заміна чому."
+answers = ["for"]
+
+[[question]]
+id      = 68
+prompt  = "Speed gives them an advantage ___ rivals."
+explain = "an advantage <b class=\"ans\">over</b> = перевага над."
+answers = ["over"]
+
+[[question]]
+id      = 69
+prompt  = "Police reported a rise ___ street crime."
+explain = "a rise <b class=\"ans\">in</b> = зростання чогось."
+answers = ["in"]
+
+[[question]]
+id      = 70
+prompt  = "The firm saw a steady decline ___ sales."
+explain = "a decline <b class=\"ans\">in</b> = спад чогось."
+answers = ["in"]
+
+[[question]]
+id      = 71
+group   = "Idioms / set phrases"
+prompt  = "I’m sure he broke it ___ purpose."
+explain = "<b class=\"ans\">on</b> purpose = навмисне."
+answers = ["on"]
+
+[[question]]
+id      = 72
+prompt  = "Who exactly is ___ charge of this project?"
+explain = "<b class=\"ans\">in</b> charge of = відповідальний за."
+answers = ["in"]
+
+[[question]]
+id      = 73
+prompt  = "Remember, real lives are ___ stake here."
+explain = "<b class=\"ans\">at</b> stake = під загрозою/на кону."
+answers = ["at"]
+
+[[question]]
+id      = 74
+prompt  = "She knew the whole speech ___ heart."
+explain = "<b class=\"ans\">by</b> heart = напам’ять."
+answers = ["by"]
+
+[[question]]
+id      = 75
+prompt  = "You should book the tickets well ___ advance."
+explain = "<b class=\"ans\">in</b> advance = заздалегідь."
+answers = ["in"]
+
+[[question]]
+id      = 76
+prompt  = "___ behalf of the whole team, thank you."
+explain = "<b class=\"ans\">on</b> behalf of = від імені."
+answers = ["on"]
+
+[[question]]
+id      = 77
+prompt  = "The court ruled ___ favour of the tenant."
+explain = "<b class=\"ans\">in</b> favour of = на користь."
+answers = ["in"]
+
+[[question]]
+id      = 78
+prompt  = "The exhausted company was ___ the verge of collapse."
+explain = "<b class=\"ans\">on</b> the verge of = на межі/на порозі."
+answers = ["on"]
+
+[[question]]
+id      = 79
+prompt  = "___ the sake of clarity, I’ll repeat it."
+explain = "<b class=\"ans\">for</b> the sake of = заради."
+answers = ["for"]
+
+[[question]]
+id      = 80
+prompt  = "___ terms of cost, the plan is excellent."
+explain = "<b class=\"ans\">in</b> terms of = щодо/з погляду."
+answers = ["in"]
+
+[[question]]
+id      = 81
+prompt  = "They chased growth ___ the expense of quality."
+explain = "<b class=\"ans\">at</b> the expense of = коштом/ціною."
+answers = ["at"]
+
+[[question]]
+id      = 82
+prompt  = "___ the wake of the scandal, he resigned."
+explain = "<b class=\"ans\">in</b> the wake of = унаслідок/слідом за."
+answers = ["in"]
+
+[[question]]
+id      = 83
+prompt  = "___ the whole, the trip was a success."
+explain = "<b class=\"ans\">on</b> the whole = загалом."
+answers = ["on"]
+
+[[question]]
+id      = 84
+prompt  = "The new data is ___ odds with the theory."
+explain = "<b class=\"ans\">at</b> odds with = у суперечності з."
+answers = ["at"]
+
+[[question]]
+id      = 85
+prompt  = "The match is ___ no means over yet."
+explain = "<b class=\"ans\">by</b> no means = аж ніяк не."
+answers = ["by"]
+
+[[question]]
+id      = 86
+prompt  = "Sorry, the lift is ___ of order today."
+explain = "<b class=\"ans\">out</b> of order = не працює/несправний."
+answers = ["out"]
+
+[[question]]
+id      = 87
+prompt  = "Raises will be ___ line with inflation."
+explain = "<b class=\"ans\">in</b> line with = відповідно до."
+answers = ["in"]
+
+[[question]]
+id      = 88
+prompt  = "The sailors were ___ the mercy of the storm."
+explain = "<b class=\"ans\">at</b> the mercy of = у владі/на милість."
+answers = ["at"]
+
+[[question]]
+id      = 89
+prompt  = "He was dismissed ___ the grounds of misconduct."
+explain = "<b class=\"ans\">on</b> the grounds of = на підставі."
+answers = ["on"]
+
+[[question]]
+id      = 90
+prompt  = "It will save money ___ the long run."
+explain = "<b class=\"ans\">in</b> the long run = у довгостроковій перспективі."
+answers = ["in"]
+
+[[question]]
+id      = 91
+group   = "Phrasal verbs"
+prompt  = "I simply can’t put up ___ this constant noise."
+explain = "put up <b class=\"ans\">with</b> = терпіти/миритися з."
+answers = ["with"]
+
+[[question]]
+id      = 92
+prompt  = "Somehow he got away ___ cheating on the test."
+explain = "get away <b class=\"ans\">with</b> = уникнути покарання за."
+answers = ["with"]
+
+[[question]]
+id      = 93
+prompt  = "The team came up ___ a brilliant idea."
+explain = "come up <b class=\"ans\">with</b> = вигадати/запропонувати."
+answers = ["with"]
+
+[[question]]
+id      = 94
+prompt  = "Hurry - we’ve run ___ of milk again."
+explain = "run <b class=\"ans\">out</b> of = закінчитися (запас)."
+answers = ["out"]
+
+[[question]]
+id      = 95
+prompt  = "We worked late to make up ___ lost time."
+explain = "make up <b class=\"ans\">for</b> = компенсувати."
+answers = ["for"]
+
+[[question]]
+id      = 96
+prompt  = "The doctor told him to cut down ___ sugar."
+explain = "cut down <b class=\"ans\">on</b> = скоротити (споживання)."
+answers = ["on"]
+
+[[question]]
+id      = 97
+prompt  = "It’s hard to keep up ___ the latest news."
+explain = "keep up <b class=\"ans\">with</b> = встигати за."
+answers = ["with"]
+
+[[question]]
+id      = 98
+prompt  = "She has always looked up ___ her mentor."
+explain = "look up <b class=\"ans\">to</b> = поважати, брати за приклад."
+answers = ["to"]
+
+[[question]]
+id      = 99
+prompt  = "You shouldn’t look down ___ manual workers."
+explain = "look down <b class=\"ans\">on</b> = зневажати/дивитися звисока."
+answers = ["on", "upon"]
+
+[[question]]
+id      = 100
+group   = "Subtle: in time vs on time"
+prompt  = "Quick, or we won’t get there ___ time for the start."
+explain = "<b class=\"ans\">in</b> time = встигнути (із запасом). Пор. <i>on time</i> = точно за розкладом."
+answers = ["in"]
+
+[[question]]
+id      = 101
+group   = "Zero-preposition traps"
+prompt  = "The proposal seriously lacks ___ detail."
+explain = "<b>lack sth</b> - дієслово без прийменника! Але іменник - <i>a lack <b>of</b></i>."
+answers = ["-", "nothing", "none", "x"]
+
+[[question]]
+id      = 102
+prompt  = "He closely resembles ___ his late father."
+explain = "<b>resemble sb</b> - без прийменника (= бути схожим на)."
+answers = ["-", "nothing", "none", "x"]
+
