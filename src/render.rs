@@ -1,8 +1,47 @@
 //! HTML rendering with maud.
 
+use std::collections::BTreeMap;
+
 use maud::{DOCTYPE, Markup, PreEscaped, html};
 
-use crate::quiz::{Kind, Question, Quiz};
+use crate::quiz::{Kind, Question, Quiz, Quizzes};
+
+/// Index page: all quizzes grouped by section.
+pub fn index_page(quizzes: &Quizzes) -> Markup {
+    let mut sections = BTreeMap::<&str, Vec<(&str, &str)>>::new();
+    for (id, quiz) in quizzes.iter() {
+        sections
+            .entry(quiz.section.as_str())
+            .or_default()
+            .push((id.as_str(), quiz.title.as_str()));
+    }
+    html! {
+        (DOCTYPE)
+        html lang="en" {
+            head {
+                meta charset="utf-8";
+                meta name="viewport" content="width=device-width, initial-scale=1";
+                title { "cram" }
+                link rel="stylesheet" href="/style.css";
+            }
+            body {
+                main .index {
+                    h1 { "cram" }
+                    @for (name, topics) in &sections {
+                        section .group {
+                            h2 { (name) }
+                            ul .topics {
+                                @for (id, title) in topics {
+                                    li { a href=(format!("/quiz/{id}")) { (title) } }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 
 /// Full HTML page for one quiz.
 pub fn quiz_page(id: &str, quiz: &Quiz) -> Markup {

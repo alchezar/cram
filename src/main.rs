@@ -16,6 +16,7 @@ use axum::{
     routing,
 };
 use axum_extra::extract::Form;
+use maud::Markup;
 use serde::Deserialize;
 use tokio::{net::TcpListener, signal};
 use tower_http::{services::ServeDir, set_header::SetResponseHeaderLayer, trace::TraceLayer};
@@ -43,6 +44,7 @@ async fn main() -> Result<(), Error> {
     );
 
     let app = Router::new()
+        .route("/", routing::get(index))
         .route("/quiz/{id}", routing::get(quiz_page))
         .route("/quiz/{id}/check/{qid}", routing::post(check))
         .fallback_service(ServeDir::new(&config.web_dir))
@@ -59,6 +61,13 @@ async fn main() -> Result<(), Error> {
         .await?;
 
     Ok(())
+}
+
+// `GET /`
+//
+/// Render the index page listing every quiz by section.
+async fn index(State(quizzes): State<Arc<Quizzes>>) -> Markup {
+    render::index_page(&quizzes)
 }
 
 // `GET /quiz/{id}`

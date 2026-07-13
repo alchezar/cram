@@ -23,10 +23,48 @@ body {
   font: 16px/1.5 system-ui, sans-serif;
 }
 
-.quiz {
+.quiz,
+.index {
   max-width: 44rem;
   margin: 0 auto;
   padding: 2rem 1.25rem 4rem;
+}
+
+.group {
+  margin-bottom: 1.75rem;
+}
+
+.group h2 {
+  margin: 0 0 0.6rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.topics {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.topics a {
+  display: block;
+  padding: 0.6rem 0.9rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 0.4rem;
+  color: var(--fg);
+  text-decoration: none;
+}
+
+.topics a:hover {
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 .back {
