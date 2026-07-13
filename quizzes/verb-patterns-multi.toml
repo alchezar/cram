@@ -1,0 +1,405 @@
+# quizzes/verb-patterns-multi.toml
+
+title   = "Verb Patterns (multi-select)"
+section = "Verb patterns"
+kind    = "multi"
+intro   = "Що ставити після дієслова. Познач ВСІ правильні завершення для кожного питання."
+
+rules = '''
+<b>4 якорі - що ставити після дієслова:</b>
+<span class="grp" style="margin-top:10px">
+  <b>1. -ing група</b> -> лише <b>-ing</b>, ніколи «to».<br>
+  <span class="why">💡 Дія тут - наче річ чи процес, тож герундій («дія-як-іменник»): <i>enjoy swimming</i> ≈ «люблю саме плавання».</span>
+  <span class="v">enjoy, finish, avoid, mind, deny, admit, practise, risk</span><br>
+  ✅ enjoy <b>swimming</b> &nbsp;·&nbsp; ❌ enjoy to swim<br>
+  <span class="note2">deny та admit, окрім -ing, беруть ще й «that…»: denied <b>that</b> he stole it.</span>
+</span>
+<span class="grp">
+  <b>2. PIDRS</b> (propose, insist, demand, recommend, suggest) - спільне: <b>ніколи «sb to do»</b>.<br>
+  <span class="why">💡 Ти не наказуєш людині напряму, а пропонуєш/вимагаєш саму дію - тому замість «sb to do» іде -ing або that-речення. А форма різна:</span>
+  • suggest / recommend / propose -> <b>-ing</b> або <b>that</b>: suggest <b>going</b> / that we go<br>
+  • insist -> <b>on -ing</b> / that: insist <b>on paying</b><br>
+  • demand -> <b>to-inf</b> / that: demand <b>to be paid</b> <span class="note2">(виняток!)</span><br>
+  ❌ suggest me to go &nbsp;·&nbsp; ❌ demand the boss to pay
+</span>
+<span class="grp">
+  <b>3. sb + to do</b> -> об’єкт + <b>to-infinitive</b>.<br>
+  <span class="why">💡 Дія спрямована на людину: ти впливаєш на когось, щоб він щось зробив, тож обов’язково об’єкт. <i>persuaded me to stay</i> = «переконали мене лишитися».</span>
+  <span class="v">persuade, encourage, ask, tell, want, force, allow, remind, expect, get</span><br>
+  ✅ persuaded me <b>to stay</b> &nbsp;·&nbsp; told him <b>to wait</b><br>
+  <span class="note2">tell / remind / ask / expect беруть ще й «that…»: told me <b>that</b> he was late.</span>
+</span>
+<span class="grp">
+  <b>4. make / let / have / hear / see / watch</b> -> <b>гола форма</b> (без «to»).<br>
+  <span class="why">💡 Примус (make / let / have) і чуття (see / hear / watch): дію спричиняєш або сприймаєш цілком - тому без «to». <i>made me work</i> = «змусили мене працювати».</span>
+  ✅ made me <b>work</b> &nbsp;·&nbsp; saw him <b>leave</b> &nbsp;·&nbsp; let them <b>go</b> &nbsp;·&nbsp; ❌ made me to work
+</span>
+'''
+
+[[question]]
+id      = 1
+group   = "1. -ing група - лише -ing, ніколи «to»"
+prompt  = "I really enjoy…"
+explain = "Після <b>enjoy</b> йде тільки <b>-ing</b>: enjoy <b>swimming</b>. Ніколи «to swim», ніколи «that…». Тут правильна одна."
+options = [
+  { text = "swimming in the sea", correct = true },
+  { text = "to swim in the sea", correct = false },
+  { text = "that I swim", correct = false },
+  { text = "me swimming", correct = false },
+]
+
+[[question]]
+id      = 2
+prompt  = "Have you finished…"
+explain = "<b>finish</b> бере лише <b>-ing</b>: finish <b>writing</b>. «to write» і «write» - неможливо."
+options = [
+  { text = "writing the report", correct = true },
+  { text = "to write the report", correct = false },
+  { text = "write the report", correct = false },
+  { text = "that you write", correct = false },
+]
+
+[[question]]
+id      = 3
+prompt  = "Try to avoid…"
+explain = "<b>avoid</b> бере лише <b>-ing</b>: avoid <b>making</b>. Не «to make»."
+options = [
+  { text = "making mistakes", correct = true },
+  { text = "to make mistakes", correct = false },
+  { text = "make mistakes", correct = false },
+  { text = "that you make", correct = false },
+]
+
+[[question]]
+id      = 4
+prompt  = "Would you mind…"
+explain = "<b>mind</b> (у питанні = «чи не заперечуєш») бере лише <b>-ing</b>: mind <b>opening</b>. Не «to open»."
+options = [
+  { text = "opening the window", correct = true },
+  { text = "to open the window", correct = false },
+  { text = "open the window", correct = false },
+  { text = "that you open", correct = false },
+]
+
+[[question]]
+id      = 5
+prompt  = "He denied…"
+explain = "<b>deny</b> бере <b>-ing</b> (denied <b>stealing</b>) або <b>that</b>-речення (denied <b>that</b> he stole it). Форми «to steal» / «steal» - ні."
+options = [
+  { text = "stealing it", correct = true },
+  { text = "that he had stolen it", correct = true },
+  { text = "to steal it", correct = false },
+  { text = "steal it", correct = false },
+]
+
+[[question]]
+id      = 6
+prompt  = "She admitted…"
+explain = "<b>admit</b> бере <b>-ing</b> (admitted <b>cheating</b>) або <b>that</b> (admitted <b>that</b> she cheated). «to cheat» / «cheat» - ні."
+options = [
+  { text = "cheating", correct = true },
+  { text = "that she had cheated", correct = true },
+  { text = "to cheat", correct = false },
+  { text = "cheat", correct = false },
+]
+
+[[question]]
+id      = 7
+prompt  = "You should practise…"
+explain = "<b>practise</b> бере лише <b>-ing</b>: practise <b>speaking</b>. Не «to speak»."
+options = [
+  { text = "speaking English", correct = true },
+  { text = "to speak English", correct = false },
+  { text = "speak English", correct = false },
+  { text = "that you speak", correct = false },
+]
+
+[[question]]
+id      = 8
+prompt  = "Don’t risk…"
+explain = "<b>risk</b> бере лише <b>-ing</b>: risk <b>losing</b> (ризикувати втратити). Не «to lose»."
+options = [
+  { text = "losing everything", correct = true },
+  { text = "to lose everything", correct = false },
+  { text = "lose everything", correct = false },
+  { text = "that you lose", correct = false },
+]
+
+[[question]]
+id      = 9
+group   = "2. PIDRS - спільне «не sb to do»; комплемент різний"
+prompt  = "The chairman proposed…"
+explain = "<b>propose</b> бере <b>-ing</b> (propose <b>postponing</b>) або <b>that</b> (propose <b>that we postpone</b>). ❌ «us to postpone» - це «sb to do»; ❌ «us postponing» - об’єкт не ставлять перед -ing (особа йде в «that»)."
+options = [
+  { text = "postponing the vote", correct = true },
+  { text = "that we postpone the vote", correct = true },
+  { text = "us to postpone the vote", correct = false },
+  { text = "us postponing the vote", correct = false },
+]
+
+[[question]]
+id      = 10
+prompt  = "She insisted…"
+explain = "<b>insist</b> бере <b>on + -ing</b> (insist <b>on paying</b>) або <b>that</b> (insist <b>that</b> she should pay). ❌ голе «paying» (без «on»); ❌ «to pay»."
+options = [
+  { text = "on paying", correct = true },
+  { text = "that she should pay", correct = true },
+  { text = "to pay", correct = false },
+  { text = "paying", correct = false },
+]
+
+[[question]]
+id      = 11
+prompt  = "The workers demanded…"
+explain = "<b>demand</b> - виняток у PIDRS: бере <b>to-infinitive</b> (demand <b>to be paid</b>) або <b>that</b> + гола форма (demand <b>that they be paid</b>). ❌ «the boss to pay» (sb to do); ❌ «being paid» (demand не бере -ing)."
+options = [
+  { text = "to be paid more", correct = true },
+  { text = "that they be paid more", correct = true },
+  { text = "the boss to pay them more", correct = false },
+  { text = "being paid more", correct = false },
+]
+
+[[question]]
+id      = 12
+prompt  = "The guide recommended…"
+explain = "<b>recommend</b> бере <b>-ing</b> (recommend <b>visiting</b>) або <b>that</b> (recommend <b>that we visit</b>). ❌ «us to visit» (sb to do - стандартно неправильно); ❌ «us visiting»."
+options = [
+  { text = "visiting the castle", correct = true },
+  { text = "that we visit the castle", correct = true },
+  { text = "us to visit the castle", correct = false },
+  { text = "us visiting the castle", correct = false },
+]
+
+[[question]]
+id      = 13
+prompt  = "He suggested…"
+explain = "<b>suggest</b> бере <b>-ing</b> (suggest <b>leaving</b>) або <b>that</b> (suggest <b>that we leave</b>). ❌ «us to leave» (sb to do); ❌ «to leave» (голий інфінітив після suggest не буває)."
+options = [
+  { text = "leaving early", correct = true },
+  { text = "that we leave early", correct = true },
+  { text = "us to leave early", correct = false },
+  { text = "to leave early", correct = false },
+]
+
+[[question]]
+id      = 14
+group   = "3. sb + to do - об’єкт + to-infinitive (деякі + that)"
+prompt  = "They persuaded…"
+explain = "<b>persuade</b> завжди з об’єктом + <b>to do</b>: persuaded <b>me to stay</b>. ❌ «me staying»; ❌ «that I stay»; ❌ «to stay» (бракує об’єкта «me»)."
+options = [
+  { text = "me to stay", correct = true },
+  { text = "me staying", correct = false },
+  { text = "that I stay", correct = false },
+  { text = "to stay", correct = false },
+]
+
+[[question]]
+id      = 15
+prompt  = "The teacher encouraged…"
+explain = "<b>encourage</b>: <b>sb + to do</b> (encouraged <b>us to read</b>) АБО <b>-ing</b> без об’єкта (encourage <b>reading</b> = заохочувати читання загалом). ❌ «us reading»; ❌ «that we read»."
+options = [
+  { text = "us to read more", correct = true },
+  { text = "reading", correct = true },
+  { text = "us reading", correct = false },
+  { text = "that we read", correct = false },
+]
+
+[[question]]
+id      = 16
+prompt  = "She asked…"
+explain = "<b>ask</b>: <b>sb + to do</b> (asked <b>me to help</b>) або <b>to do</b> без об’єкта (asked <b>to leave</b> = попросила дозволу піти). ❌ «me helping»; ❌ «that I helping»."
+options = [
+  { text = "me to help", correct = true },
+  { text = "to leave early", correct = true },
+  { text = "me helping", correct = false },
+  { text = "that I helping", correct = false },
+]
+
+[[question]]
+id      = 17
+prompt  = "He told…"
+explain = "<b>tell</b> завжди з об’єктом: <b>tell sb to do</b> (told <b>me to wait</b>) або <b>tell sb that…</b> (told <b>me that</b> he was late). ❌ «me waiting»; ❌ «to wait» (без об’єкта)."
+options = [
+  { text = "me to wait", correct = true },
+  { text = "me that he was late", correct = true },
+  { text = "me waiting", correct = false },
+  { text = "to wait", correct = false },
+]
+
+[[question]]
+id      = 18
+prompt  = "I want…"
+explain = "<b>want</b>: <b>to do</b> (want <b>to leave</b>) або <b>sb + to do</b> (want <b>you to leave</b>). ❌ «that you leave» (want that не існує); ❌ «you leaving»."
+options = [
+  { text = "you to leave", correct = true },
+  { text = "to leave", correct = true },
+  { text = "that you leave", correct = false },
+  { text = "you leaving", correct = false },
+]
+
+[[question]]
+id      = 19
+prompt  = "They forced…"
+explain = "<b>force</b> завжди з об’єктом + <b>to do</b>: forced <b>him to resign</b>. ❌ «him resign» (тут потрібне «to», force не як make); ❌ «him resigning»; ❌ «to resign» (без об’єкта)."
+options = [
+  { text = "him to resign", correct = true },
+  { text = "him resign", correct = false },
+  { text = "him resigning", correct = false },
+  { text = "to resign", correct = false },
+]
+
+[[question]]
+id      = 20
+prompt  = "They don’t allow…"
+explain = "<b>allow</b>: <b>sb + to do</b> (allow <b>us to park</b>) або <b>-ing</b> без об’єкта (allow <b>parking</b>). ❌ «us parking»; ❌ «to park» (треба або «-ing», або «sb to do»)."
+options = [
+  { text = "us to park here", correct = true },
+  { text = "parking here", correct = true },
+  { text = "us parking here", correct = false },
+  { text = "to park here", correct = false },
+]
+
+[[question]]
+id      = 21
+prompt  = "Please remind…"
+explain = "<b>remind</b> завжди з об’єктом: <b>remind sb to do</b> (remind <b>me to call</b>) або <b>remind sb that…</b>. ❌ «me calling»; ❌ «to call» (без об’єкта)."
+options = [
+  { text = "me to call him", correct = true },
+  { text = "me that I have a meeting", correct = true },
+  { text = "me calling him", correct = false },
+  { text = "to call him", correct = false },
+]
+
+[[question]]
+id      = 22
+prompt  = "We expect…"
+explain = "<b>expect</b> гнучке - аж три форми: <b>to do</b> (expect <b>to arrive</b>), <b>sb to do</b> (expect <b>the parcel to arrive</b>), <b>that…</b> (expect <b>that</b> it will arrive). ❌ лише «it arriving» (sb + -ing)."
+options = [
+  { text = "the parcel to arrive today", correct = true },
+  { text = "to arrive on time", correct = true },
+  { text = "that it will arrive", correct = true },
+  { text = "it arriving", correct = false },
+]
+
+[[question]]
+id      = 23
+prompt  = "I finally got…"
+explain = "<b>get sb to do</b> - з «to»! got <b>him to apologize</b>. get НЕ як make/let (не «him apologize» без «to»). (Інші моделі get: <b>get sth done</b> - got the car <b>fixed</b>; <b>get to do</b> - got <b>to see</b> it = мати нагоду.)"
+options = [
+  { text = "him to apologize", correct = true },
+  { text = "him apologize", correct = false },
+  { text = "him apologized", correct = false },
+  { text = "him to apologizing", correct = false },
+]
+
+[[question]]
+id      = 24
+group   = "4. make / let / have / hear / see / watch - гола форма"
+prompt  = "The teacher made…"
+explain = "<b>make sb + гола форма</b> (без «to»): made <b>us rewrite</b>. ❌ «us to rewrite», «us rewriting». (У пасиві «to» повертається: «were made <b>to</b> rewrite».)"
+options = [
+  { text = "us rewrite it", correct = true },
+  { text = "us to rewrite it", correct = false },
+  { text = "us rewriting it", correct = false },
+  { text = "us to rewriting it", correct = false },
+]
+
+[[question]]
+id      = 25
+prompt  = "My parents let…"
+explain = "<b>let sb + гола форма</b> (без «to»): let <b>me stay</b>. ❌ «to stay», «staying»."
+options = [
+  { text = "me stay out late", correct = true },
+  { text = "me to stay out late", correct = false },
+  { text = "me staying out late", correct = false },
+  { text = "to stay out late", correct = false },
+]
+
+[[question]]
+id      = 26
+prompt  = "I’ll have the plumber…"
+explain = "<b>have sb do</b> (одноразово: <b>fix</b>) або <b>have sb doing</b> (тривало: <b>fixing</b>) - обидва без «to». ❌ have the plumber <b>to</b> fix. (Також have sth <b>done</b>: have it fixed. І не плутай з <b>have to</b> = мусити.)"
+options = [
+  { text = "fix the leak", correct = true },
+  { text = "fixing the leak", correct = true },
+  { text = "to fix the leak", correct = false },
+  { text = "fixed the leak", correct = false },
+]
+
+[[question]]
+id      = 27
+prompt  = "I heard…"
+explain = "Після <b>hear + об’єкт</b> - <b>гола форма</b> (shout) або <b>-ing</b> (shouting). Без «to», без відмінювання. (Увага: «heard someone shouted» = вже інше «hear <b>that</b>…».)"
+options = [
+  { text = "someone shout", correct = true },
+  { text = "someone shouting", correct = true },
+  { text = "someone to shout", correct = false },
+  { text = "someone to be shouting", correct = false },
+]
+
+[[question]]
+id      = 28
+prompt  = "We saw…"
+explain = "Після <b>see + об’єкт</b> - <b>гола форма</b> (take off) або <b>-ing</b> (taking off). Ніколи «to»."
+options = [
+  { text = "the plane take off", correct = true },
+  { text = "the plane taking off", correct = true },
+  { text = "the plane to take off", correct = false },
+  { text = "the plane to have taken off", correct = false },
+]
+
+[[question]]
+id      = 29
+prompt  = "They watched…"
+explain = "Після <b>watch + об’єкт</b> - <b>гола форма</b> (set) або <b>-ing</b> (setting). ❌ «the sun <b>sets</b>»: «sets» відмінене (-s), а після watched не відмінюють (як не кажуть «watched him leaveS»). «set» тут - гола форма, а не минулий час. ❌ «to set»."
+options = [
+  { text = "the sun set", correct = true },
+  { text = "the sun setting", correct = true },
+  { text = "the sun to set", correct = false },
+  { text = "the sun sets", correct = false },
+]
+
+[[question]]
+id      = 30
+group   = "5. Гнучкі / зміна значення"
+prompt  = "It started…"
+explain = "<b>start / begin / continue</b> беруть <b>і to-inf, і -ing</b> майже без різниці: start <b>to rain</b> = start <b>raining</b>. ❌ голе «rain»; ❌ «that it rains»."
+options = [
+  { text = "to rain", correct = true },
+  { text = "raining", correct = true },
+  { text = "rain", correct = false },
+  { text = "that it rains", correct = false },
+]
+
+[[question]]
+id      = 31
+prompt  = "He stopped…"
+explain = "<b>stop</b> бере обидві, але значення різне: <b>stop TO rest</b> = зупинився, ЩОБ відпочити (мета); <b>stop resting</b> = припинив відпочивати. ❌ голе «rest»; ❌ «to resting»."
+options = [
+  { text = "to rest", correct = true },
+  { text = "resting", correct = true },
+  { text = "rest", correct = false },
+  { text = "to resting", correct = false },
+]
+
+[[question]]
+id      = 32
+prompt  = "She helped…"
+explain = "<b>help sb do</b> (helped <b>me carry</b>) АБО <b>help sb to do</b> (helped <b>me to carry</b>) - обидві норма. ❌ «me carrying»; ❌ «carrying» (тут бракує об’єкта)."
+options = [
+  { text = "me carry the bags", correct = true },
+  { text = "me to carry the bags", correct = true },
+  { text = "me carrying the bags", correct = false },
+  { text = "carrying the bags", correct = false },
+]
+
+[[question]]
+id      = 33
+prompt  = "Did you remember…"
+explain = "<b>remember</b> бере обидві, значення різне: <b>remember TO do</b> = не забути зробити (попереду); <b>remember doing</b> = пригадувати, що зробив (позаду). ❌ голе «lock»; ❌ «to locking»."
+options = [
+  { text = "to lock the door", correct = true },
+  { text = "locking the door", correct = true },
+  { text = "lock the door", correct = false },
+  { text = "to locking the door", correct = false },
+]
