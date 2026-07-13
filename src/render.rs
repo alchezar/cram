@@ -62,7 +62,13 @@ pub fn quiz_page(id: &str, quiz: &Quiz) -> Markup {
                     @if !quiz.intro.is_empty() {
                         p .intro { (quiz.intro) }
                     }
+                    @if !quiz.rules.is_empty() {
+                        div .rules { (PreEscaped(&quiz.rules)) }
+                    }
                     @for q in &quiz.questions {
+                        @if !q.group.is_empty() {
+                            h2 .group-head { (q.group) }
+                        }
                         (question(id, quiz.kind, q))
                     }
                 }

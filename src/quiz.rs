@@ -20,6 +20,9 @@ pub struct Quiz {
     /// Short intro shown above the questions.
     #[serde(default)]
     pub intro: String,
+    /// Optional HTML cheat-sheet shown above the questions (rendered as-is).
+    #[serde(default)]
+    pub rules: String,
     /// Questions in display order.
     #[serde(default, rename = "question")]
     pub questions: Vec<Question>,
@@ -42,6 +45,9 @@ pub enum Kind {
 pub struct Question {
     /// Stable, unique id within the quiz.
     pub id: u32,
+    /// Optional group heading shown before this question.
+    #[serde(default)]
+    pub group: String,
     /// Question text with a `___` blank.
     pub prompt: String,
     /// Explanation shown after answering (may contain inline HTML).
