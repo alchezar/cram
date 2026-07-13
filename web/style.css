@@ -101,3 +101,66 @@ h1 {
   outline: none;
   border-color: var(--accent);
 }
+
+.answer-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.check {
+  align-self: flex-start;
+  padding: 0.45rem 1.1rem;
+  background: var(--accent);
+  color: var(--black);
+  border: none;
+  border-radius: 0.35rem;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.check:hover {
+  filter: brightness(1.08);
+}
+
+.result:empty {
+  display: none;
+}
+
+.verdict {
+  border-left: 3px solid var(--border);
+  border-radius: 0.35rem;
+  padding: 0.5rem 0.9rem;
+  background: var(--black);
+}
+
+.verdict.ok {
+  border-color: var(--good);
+}
+
+.verdict.bad {
+  border-color: var(--bad);
+}
+
+.verdict .head {
+  margin: 0 0 0.35rem;
+  font-weight: 600;
+}
+
+.verdict.ok .head {
+  color: var(--good);
+}
+
+.verdict.bad .head {
+  color: var(--bad);
+}
+
+.solution {
+  margin: 0.25rem 0;
+  color: var(--muted);
+}
+
+.explain {
+  margin: 0.5rem 0 0;
+}

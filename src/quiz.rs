@@ -104,6 +104,40 @@ impl Quizzes {
 }
 
 impl Quiz {
+    /// Find a question by its id.
+    pub fn question(&self, qid: u32) -> Option<&Question> {
+        self.questions.iter().find(|q| q.id == qid)
+    }
+}
+
+impl Question {
+    /// Whether `selected` option indices (multi/single) or `text` (text kind)
+    /// match this question's correct answer.
+    pub fn is_correct(&self, kind: Kind, selected: &[usize], text: &str) -> bool {
+        match kind {
+            Kind::Multi => {
+                let want = self
+                    .options
+                    .iter()
+                    .enumerate()
+                    .filter(|(_, o)| o.correct)
+                    .map(|(i, _)| i)
+                    .collect::<HashSet<_>>();
+                let got = selected.iter().copied().collect::<HashSet<_>>();
+                want == got
+            }
+            Kind::Single => {
+                selected.len() == 1 && self.options.get(selected[0]).is_some_and(|o| o.correct)
+            }
+            Kind::Text => {
+                let want = text.trim().to_lowercase();
+                !want.is_empty() && self.answers.iter().any(|a| a.trim().to_lowercase() == want)
+            }
+        }
+    }
+}
+
+impl Quiz {
     /// Check that every question is well-formed for this quiz's `kind`.
     fn validate(self, id: &str) -> Result<Self, Error> {
         let mut seen = HashSet::new();

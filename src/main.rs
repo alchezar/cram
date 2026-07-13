@@ -5,7 +5,8 @@ mod error;
 mod quiz;
 mod render;
 
-use std::{net::SocketAddr, sync::Arc};
+use std::net::SocketAddr;
+use std::sync::Arc;
 
 use axum::{
     Router,
@@ -14,6 +15,8 @@ use axum::{
     response::{IntoResponse, Response},
     routing,
 };
+use axum_extra::extract::Form;
+use serde::Deserialize;
 use tokio::{net::TcpListener, signal};
 use tower_http::{services::ServeDir, set_header::SetResponseHeaderLayer, trace::TraceLayer};
 use tracing_subscriber::EnvFilter;
@@ -41,6 +44,7 @@ async fn main() -> Result<(), Error> {
 
     let app = Router::new()
         .route("/quiz/{id}", routing::get(quiz_page))
+        .route("/quiz/{id}/check/{qid}", routing::post(check))
         .fallback_service(ServeDir::new(&config.web_dir))
         .layer(no_store)
         .layer(TraceLayer::new_for_http())
@@ -65,6 +69,33 @@ async fn quiz_page(State(quizzes): State<Arc<Quizzes>>, Path(id): Path<String>) 
         Some(quiz) => render::quiz_page(&id, quiz).into_response(),
         None => (StatusCode::NOT_FOUND, "unknown quiz").into_response(),
     }
+}
+
+/// A submitted answer: selected option indices (multi/single) or free text.
+#[derive(Debug, Deserialize)]
+struct Answer {
+    #[serde(default)]
+    opt: Vec<usize>,
+    #[serde(default)]
+    answer: String,
+}
+
+// `POST /quiz/{id}/check/{qid}`
+//
+/// Check one answer and return an HTML result fragment for htmx to swap in.
+async fn check(
+    State(quizzes): State<Arc<Quizzes>>,
+    Path((id, qid)): Path<(String, u32)>,
+    Form(answer): Form<Answer>,
+) -> Response {
+    let Some(quiz) = quizzes.get(&id) else {
+        return (StatusCode::NOT_FOUND, "unknown quiz").into_response();
+    };
+    let Some(question) = quiz.question(qid) else {
+        return (StatusCode::NOT_FOUND, "unknown question").into_response();
+    };
+    let correct = question.is_correct(quiz.kind, &answer.opt, &answer.answer);
+    render::result(quiz.kind, question, correct).into_response()
 }
 
 /// Wait for Ctrl-C to trigger a clean shutdown.
