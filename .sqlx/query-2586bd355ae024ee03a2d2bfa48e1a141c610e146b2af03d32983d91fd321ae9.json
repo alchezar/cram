@@ -1,0 +1,12 @@
+{
+  "db_name": "SQLite",
+  "query": "\n            INSERT OR IGNORE INTO mastery\n               (user_id, quiz_id, question_id, streak, seen, correct, updated_at)\n            VALUES ($1, $2, $3, 0, 0, 0, $4)\n        ",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Right": 4
+    },
+    "nullable": []
+  },
+  "hash": "2586bd355ae024ee03a2d2bfa48e1a141c610e146b2af03d32983d91fd321ae9"
+}

@@ -16,6 +16,8 @@ pub struct Config {
     pub web_dir: PathBuf,
     /// Directory of quiz TOML files.
     pub quizzes_dir: PathBuf,
+    /// sqlx connection URL for the progress database.
+    pub database_url: String,
 }
 
 impl Config {

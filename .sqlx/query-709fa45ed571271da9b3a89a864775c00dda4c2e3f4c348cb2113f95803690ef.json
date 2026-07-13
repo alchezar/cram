@@ -1,0 +1,12 @@
+{
+  "db_name": "SQLite",
+  "query": "\n            UPDATE mastery\n              SET streak = (streak + 1) * $1,\n                  seen = seen + 1,\n                  correct = correct + $2,\n                  updated_at = $3\n            WHERE user_id = $4 AND quiz_id = $5 AND question_id = $6\n        ",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Right": 6
+    },
+    "nullable": []
+  },
+  "hash": "709fa45ed571271da9b3a89a864775c00dda4c2e3f4c348cb2113f95803690ef"
+}

@@ -3,6 +3,7 @@
 use std::io::Error as IoError;
 
 use config::ConfigError;
+use sqlx::{Error as SqlxError, migrate::MigrateError};
 use thiserror::Error;
 use toml::de::Error as TomlError;
 
@@ -24,4 +25,12 @@ pub enum Error {
     /// A quiz failed content validation.
     #[error("content: {0}")]
     Content(String),
+
+    /// A database query or connection failed.
+    #[error("db: {0}")]
+    Db(#[from] SqlxError),
+
+    /// A database migration failed.
+    #[error("migrate: {0}")]
+    Migrate(#[from] MigrateError),
 }

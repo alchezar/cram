@@ -1,7 +1,5 @@
 //! HTTP routes and their handlers.
 
-use std::sync::Arc;
-
 use axum::{
     Router,
     extract::{Path, State},
@@ -13,15 +11,15 @@ use axum_extra::extract::Form;
 use maud::Markup;
 use serde::Deserialize;
 
-use crate::{quiz::Quizzes, render};
+use crate::{AppState, progress, render};
 
 /// Build the application router with all routes and shared state.
-pub fn router(quizzes: Arc<Quizzes>) -> Router {
+pub fn router(state: AppState) -> Router {
     Router::new()
         .route("/", routing::get(index))
         .route("/quiz/{id}", routing::get(quiz_page))
         .route("/quiz/{id}/check/{qid}", routing::post(check))
-        .with_state(quizzes)
+        .with_state(state)
 }
 
 /// What a handler returns: a rendered HTML page/fragment or a 404.
@@ -42,15 +40,15 @@ impl IntoResponse for AppResponse {
 // `GET /`
 //
 /// Render the index page listing every quiz by section.
-async fn index(State(quizzes): State<Arc<Quizzes>>) -> AppResponse {
-    AppResponse::Html(render::index_page(&quizzes))
+async fn index(State(state): State<AppState>) -> AppResponse {
+    AppResponse::Html(render::index_page(&state.quizzes))
 }
 
 // `GET /quiz/{id}`
 //
 /// Render one quiz page, or 404 if the id is unknown.
-async fn quiz_page(State(quizzes): State<Arc<Quizzes>>, Path(id): Path<String>) -> AppResponse {
-    match quizzes.get(&id) {
+async fn quiz_page(State(state): State<AppState>, Path(id): Path<String>) -> AppResponse {
+    match state.quizzes.get(&id) {
         Some(quiz) => AppResponse::Html(render::quiz_page(&id, quiz)),
         None => AppResponse::NotFound("unknown quiz"),
     }
@@ -69,16 +67,19 @@ struct Answer {
 //
 /// Check one answer and return an HTML result fragment for htmx to swap in.
 async fn check(
-    State(quizzes): State<Arc<Quizzes>>,
+    State(state): State<AppState>,
     Path((id, qid)): Path<(String, u32)>,
     Form(answer): Form<Answer>,
 ) -> AppResponse {
-    let Some(quiz) = quizzes.get(&id) else {
+    let Some(quiz) = state.quizzes.get(&id) else {
         return AppResponse::NotFound("unknown quiz");
     };
     let Some(question) = quiz.question(qid) else {
         return AppResponse::NotFound("unknown question");
     };
     let correct = question.is_correct(quiz.kind, &answer.opt, &answer.answer);
+    if let Err(e) = progress::record(&state.db, &id, qid, correct).await {
+        tracing::error!("failed to record progress for {id}/{qid}: {e}");
+    }
     AppResponse::Html(render::result(quiz.kind, question, correct))
 }

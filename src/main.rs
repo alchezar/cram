@@ -1,7 +1,9 @@
 //! cram - local server for the English trainers.
 
 mod config;
+mod db;
 mod error;
+mod progress;
 mod quiz;
 mod render;
 mod route;
@@ -10,11 +12,21 @@ use std::net::SocketAddr;
 use std::sync::Arc;
 
 use axum::http::{HeaderValue, header};
+use sqlx::SqlitePool;
 use tokio::{net::TcpListener, signal};
 use tower_http::{services::ServeDir, set_header::SetResponseHeaderLayer, trace::TraceLayer};
 use tracing_subscriber::EnvFilter;
 
 use crate::{config::Config, error::Error, quiz::Quizzes};
+
+/// Shared application state passed to every handler.
+#[derive(Clone, Debug)]
+pub struct AppState {
+    /// All quizzes, loaded once at startup.
+    pub quizzes: Arc<Quizzes>,
+    /// Progress database pool.
+    pub db: SqlitePool,
+}
 
 #[tokio::main]
 async fn main() -> Result<(), Error> {
@@ -29,13 +41,17 @@ async fn main() -> Result<(), Error> {
     let quizzes = Arc::new(Quizzes::load(&config.quizzes_dir)?);
     tracing::info!("loaded {} quizzes", quizzes.iter().count());
 
+    let db = db::connect(&config.database_url).await?;
+    tracing::info!("progress database ready at {}", config.database_url);
+    let state = AppState { quizzes, db };
+
     // Disable caching so browsers always fetch the latest pages.
     let no_store = SetResponseHeaderLayer::overriding(
         header::CACHE_CONTROL,
         HeaderValue::from_static("no-store, must-revalidate"),
     );
 
-    let app = route::router(quizzes)
+    let app = route::router(state)
         .fallback_service(ServeDir::new(&config.web_dir))
         .layer(no_store)
         .layer(TraceLayer::new_for_http());

@@ -1,5 +1,8 @@
 # cram server config. Run from the project root; paths are relative to it.
 # Copy this file to cram.toml and adjust for your machine.
-port        = 16666
-web_dir     = "web"
-quizzes_dir = "quizzes"
+port         = 16666
+web_dir      = "web"
+quizzes_dir  = "quizzes"
+# Absolute path so `cargo run` and the installed binary share one DB
+# regardless of the working directory. `?mode=rwc` creates it if missing.
+database_url = "sqlite:/Users/you/Library/Application%20Support/cram/cram.db?mode=rwc"
