@@ -1,0 +1,103 @@
+/* cram styles. Colors mirror the nvim kinder_theme palette. */
+:root {
+  --bg: #262626;
+  --surface: #333333;
+  --black: #181818;
+  --fg: #DCDCDC;
+  --muted: #ABB2BF;
+  --border: #5A5A5A;
+  --accent: #61AFEF;
+  --good: #7BD88F;
+  --bad: #FC6161;
+  --warn: #FCE566;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font: 16px/1.5 system-ui, sans-serif;
+}
+
+.quiz {
+  max-width: 44rem;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+}
+
+.back {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.back:hover {
+  color: var(--accent);
+}
+
+h1 {
+  margin: 0.5rem 0 0.25rem;
+  font-size: 1.6rem;
+}
+
+.intro {
+  color: var(--muted);
+  margin: 0 0 2rem;
+}
+
+.question {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  padding: 1.25rem 1.25rem 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.prompt {
+  margin: 0 0 1rem;
+  font-weight: 600;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.4rem 0.6rem;
+  border: 1px solid transparent;
+  border-radius: 0.35rem;
+  cursor: pointer;
+}
+
+.option:hover {
+  border-color: var(--border);
+  background: var(--black);
+}
+
+.option input {
+  accent-color: var(--accent);
+}
+
+.text-answer {
+  width: 100%;
+  padding: 0.5rem 0.7rem;
+  background: var(--black);
+  color: var(--fg);
+  border: 1px solid var(--border);
+  border-radius: 0.35rem;
+  font: inherit;
+}
+
+.text-answer:focus {
+  outline: none;
+  border-color: var(--accent);
+}

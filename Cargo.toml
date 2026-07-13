@@ -25,6 +25,7 @@ wildcard_imports = "deny"
 [dependencies]
 axum = "0.8"
 config = { version = "0.15", default-features = false, features = ["toml"] }
+maud = { version = "0.27.0", features = ["axum"] }
 serde = { version = "1.0", features = ["derive"] }
 thiserror = "2.0"
 tokio = { version = "1.52", features = ["rt-multi-thread", "macros", "net", "signal"] }

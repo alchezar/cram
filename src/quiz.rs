@@ -96,6 +96,11 @@ impl Quizzes {
     pub fn iter(&self) -> impl Iterator<Item = (&String, &Quiz)> {
         self.items.iter()
     }
+
+    /// Look up a quiz by id (the file stem).
+    pub fn get(&self, id: &str) -> Option<&Quiz> {
+        self.items.get(id)
+    }
 }
 
 impl Quiz {

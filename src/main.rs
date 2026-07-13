@@ -3,12 +3,16 @@
 mod config;
 mod error;
 mod quiz;
+mod render;
 
-use std::net::SocketAddr;
+use std::{net::SocketAddr, sync::Arc};
 
 use axum::{
     Router,
-    http::{HeaderValue, header},
+    extract::{Path, State},
+    http::{HeaderValue, StatusCode, header},
+    response::{IntoResponse, Response},
+    routing,
 };
 use tokio::{net::TcpListener, signal};
 use tower_http::{services::ServeDir, set_header::SetResponseHeaderLayer, trace::TraceLayer};
@@ -26,24 +30,8 @@ async fn main() -> Result<(), Error> {
 
     let config = Config::load("cram")?;
 
-    // Smoke test for now: load quizzes and log a summary. Routes come next step.
-    let quizzes = Quizzes::load(&config.quizzes_dir)?;
-    for (id, quiz) in quizzes.iter() {
-        let explained = quiz
-            .questions
-            .iter()
-            .filter(|q| !q.explain.is_empty())
-            .count();
-        tracing::info!(
-            "quiz {id}: \"{}\" [{:?}] in {} - {}/{} explained, intro: {}",
-            quiz.title,
-            quiz.kind,
-            quiz.section,
-            explained,
-            quiz.questions.len(),
-            !quiz.intro.is_empty(),
-        );
-    }
+    let quizzes = Arc::new(Quizzes::load(&config.quizzes_dir)?);
+    tracing::info!("loaded {} quizzes", quizzes.iter().count());
 
     // Disable caching so browsers always fetch the latest pages.
     let no_store = SetResponseHeaderLayer::overriding(
@@ -52,9 +40,11 @@ async fn main() -> Result<(), Error> {
     );
 
     let app = Router::new()
+        .route("/quiz/{id}", routing::get(quiz_page))
         .fallback_service(ServeDir::new(&config.web_dir))
         .layer(no_store)
-        .layer(TraceLayer::new_for_http());
+        .layer(TraceLayer::new_for_http())
+        .with_state(quizzes);
 
     let addr = SocketAddr::from(([0, 0, 0, 0], config.port));
     let listener = TcpListener::bind(addr).await?;
@@ -65,6 +55,16 @@ async fn main() -> Result<(), Error> {
         .await?;
 
     Ok(())
+}
+
+// `GET /quiz/{id}`
+//
+/// Render one quiz page, or 404 if the id is unknown.
+async fn quiz_page(State(quizzes): State<Arc<Quizzes>>, Path(id): Path<String>) -> Response {
+    match quizzes.get(&id) {
+        Some(quiz) => render::quiz_page(&id, quiz).into_response(),
+        None => (StatusCode::NOT_FOUND, "unknown quiz").into_response(),
+    }
 }
 
 /// Wait for Ctrl-C to trigger a clean shutdown.
