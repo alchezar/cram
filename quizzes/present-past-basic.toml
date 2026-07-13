@@ -1,47 +1,699 @@
 # quizzes/present-past-basic.toml
 
-title   = "Present & Past Simple/Continuous"
+title   = "Present & Past - Simple / Continuous"
 section = "Tenses"
 kind    = "multi"
-intro   = "Present Simple - факти й звички. Continuous - дія прямо зараз."
+intro   = "Обери правильну форму дієслова для кожного речення."
+
+rules = '''
+<b>Simple = взагалі · Continuous = у процесі:</b>
+<span class="grp" style="margin-top:10px">
+  <b>1. Present Simple</b> -> факти, звички, розклади.<br>
+  <span class="why">💡 Дія як <i>загальна правда</i> чи <i>регулярність</i>, а не «просто зараз». 3-тя особа однини: <b>-s/-es</b>.</span>
+  <span class="v">маркери: always, usually, every day, on Mondays, never; розклади (the train leaves)</span><br>
+  ✅ water <b>boils</b> · she <b>goes</b> to the gym on Mondays<br>
+</span>
+<span class="grp">
+  <b>2. Present Continuous</b> (am/is/are + -ing) -> саме зараз / тимчасово / тенденція.<br>
+  <span class="why">💡 Дія <i>у розпалі</i> навколо моменту мовлення або обмежений період. З <b>always</b> = роздратування.</span>
+  <span class="v">маркери: now, at the moment, Look!, Listen!, this week, these days, currently</span><br>
+  ✅ Look! it <b>is raining</b> · I <b>am staying</b> with friends this week<br>
+</span>
+<span class="grp">
+  <b>3. Stative verbs</b> -> стан, а не дія - <b>без Continuous</b>.<br>
+  <span class="why">💡 Дієслова думки/почуття/володіння описують стан, тож ідуть у Simple навіть про «зараз»: <i>I understand</i>, не «am understanding».</span>
+  <span class="v">know, understand, believe, want, like, love, need, prefer, own, have(=мати), seem, cost, contain</span><br>
+  ✅ I <b>understand</b> · it <b>costs</b> €200 &nbsp;·&nbsp; ❌ am understanding, is costing<br>
+  <span class="note2">think/have міняють значення: <b>be thinking about</b> = обмірковувати (дія), <b>be having</b> lunch = їсти (дія).</span>
+</span>
+<span class="grp">
+  <b>4. Past Simple <-> Past Continuous</b> -> завершена подія vs дія-в-процесі/фон.<br>
+  <span class="why">💡 <b>Past Continuous</b> (was/were + -ing) ставить сцену або довгу дію; <b>Past Simple</b> - раптова коротка подія, що її перериває.</span>
+  <span class="v">while + Continuous (фон) · when + Simple (раптова подія)</span><br>
+  ✅ While I <b>was watching</b> TV, the phone <b>rang</b>.<br>
+</span>
+'''
 
 [[question]]
 id      = 1
+group   = "1. Present Simple vs Present Continuous - взагалі vs саме зараз"
 prompt  = "Water ___ at 100 °C. (boil)"
-explain = "Загальний факт -> Present Simple: <b>boils</b>. «is boiling» = саме зараз."
+explain = "Загальний факт -> <b>Present Simple</b>: water <b>boils</b>. «is boiling» = кипить саме зараз, а не як правило."
 options = [
-  { text = "boils",      correct = true  },
+  { text = "boils", correct = true },
   { text = "is boiling", correct = false },
-  { text = "boil",       correct = false },
-  { text = "boiled",     correct = false },
+  { text = "boil", correct = false },
+  { text = "boiled", correct = false },
 ]
 
 [[question]]
 id      = 2
 prompt  = "Look! It ___ outside. (rain)"
-explain = "«Look!» = саме зараз -> Present Continuous: <b>is raining</b>."
+explain = "«Look!» = саме зараз -> <b>Present Continuous</b>: <b>is raining</b>. «rains» = взагалі/регулярно."
 options = [
-  { text = "is raining", correct = true  },
-  { text = "rains",      correct = false },
-  { text = "rain",       correct = false },
+  { text = "is raining", correct = true },
+  { text = "rains", correct = false },
+  { text = "rain", correct = false },
+  { text = "does rain", correct = false },
 ]
 
 [[question]]
 id      = 3
 prompt  = "She ___ to the gym every Monday. (go)"
-explain = "Звичка (every Monday) -> Present Simple: <b>goes</b>."
+explain = "Звичка (every Monday) -> <b>Present Simple</b>: <b>goes</b>. 3-тя особа однини -> -es."
 options = [
-  { text = "goes",     correct = true  },
+  { text = "goes", correct = true },
   { text = "is going", correct = false },
-  { text = "go",       correct = false },
+  { text = "go", correct = false },
+  { text = "going", correct = false },
 ]
 
 [[question]]
 id      = 4
 prompt  = "Be quiet - the baby ___. (sleep)"
-explain = "Просто зараз -> Present Continuous: <b>is sleeping</b>."
+explain = "Просто зараз -> <b>Present Continuous</b>: <b>is sleeping</b>."
 options = [
-  { text = "is sleeping", correct = true  },
-  { text = "sleeps",      correct = false },
-  { text = "sleep",       correct = false },
+  { text = "is sleeping", correct = true },
+  { text = "sleeps", correct = false },
+  { text = "sleep", correct = false },
+  { text = "slept", correct = false },
+]
+
+[[question]]
+id      = 5
+prompt  = "The film ___ at 8 p.m. tonight. (start)"
+explain = "Розклад/програма -> <b>Present Simple</b>: <b>starts</b> (як сеанси, потяги) - навіть про майбутнє за розкладом."
+options = [
+  { text = "starts", correct = true },
+  { text = "is starting", correct = false },
+  { text = "start", correct = false },
+  { text = "started", correct = false },
+]
+
+[[question]]
+id      = 6
+prompt  = "My brother ___ three languages. (speak)"
+explain = "Постійна здатність/факт -> <b>Present Simple</b>: <b>speaks</b>. «is speaking» = говорить саме зараз."
+options = [
+  { text = "speaks", correct = true },
+  { text = "is speaking", correct = false },
+  { text = "speak", correct = false },
+  { text = "spoke", correct = false },
+]
+
+[[question]]
+id      = 7
+prompt  = "I ___ with my parents until I find a flat. (stay)"
+explain = "Тимчасова ситуація (until…) -> <b>Present Continuous</b>: <b>am staying</b>. Постійно було б «I live with…»."
+options = [
+  { text = "am staying", correct = true },
+  { text = "stay", correct = false },
+  { text = "stays", correct = false },
+  { text = "stayed", correct = false },
+]
+
+[[question]]
+id      = 8
+prompt  = "Prices ___ rapidly this year. (rise)"
+explain = "Тенденція «навколо тепер» (this year) -> <b>Present Continuous</b>: <b>are rising</b> - зміна в процесі."
+options = [
+  { text = "are rising", correct = true },
+  { text = "rise", correct = false },
+  { text = "rises", correct = false },
+  { text = "rose", correct = false },
+]
+
+[[question]]
+id      = 9
+prompt  = "In the recipe you first ___ the sugar and butter. (mix)"
+explain = "Інструкції/рецепти -> <b>Present Simple</b>: <b>mix</b> (крок за правилом, не «саме зараз»)."
+options = [
+  { text = "mix", correct = true },
+  { text = "are mixing", correct = false },
+  { text = "mixed", correct = false },
+  { text = "is mixing", correct = false },
+]
+
+[[question]]
+id      = 10
+prompt  = "And Messi ___ the ball to Suárez! (pass)"
+explain = "Спортивний коментар наживо -> <b>Present Simple</b>: <b>passes</b> (швидкі дії, хоч і зараз)."
+options = [
+  { text = "passes", correct = true },
+  { text = "is passing", correct = false },
+  { text = "pass", correct = false },
+  { text = "passed", correct = false },
+]
+
+[[question]]
+id      = 11
+prompt  = "You ___ really hard today. Everything OK? (work)"
+explain = "«today» = тимчасово, не звичка -> <b>Present Continuous</b>: <b>are working</b>."
+options = [
+  { text = "are working", correct = true },
+  { text = "work", correct = false },
+  { text = "works", correct = false },
+  { text = "worked", correct = false },
+]
+
+[[question]]
+id      = 12
+prompt  = "The Earth ___ around the Sun. (go)"
+explain = "Наукова істина -> <b>Present Simple</b>: <b>goes</b>."
+options = [
+  { text = "goes", correct = true },
+  { text = "is going", correct = false },
+  { text = "go", correct = false },
+  { text = "went", correct = false },
+]
+
+[[question]]
+id      = 13
+prompt  = "The museum ___ at 9 every morning. (open)"
+explain = "Розклад/звичка (every morning) -> <b>Present Simple</b>: <b>opens</b>."
+options = [
+  { text = "opens", correct = true },
+  { text = "is opening", correct = false },
+  { text = "open", correct = false },
+  { text = "opened", correct = false },
+]
+
+[[question]]
+id      = 14
+prompt  = "Be careful - the ice ___ thinner. (get)"
+explain = "Зміна в процесі («стає») -> <b>Present Continuous</b>: <b>is getting</b>."
+options = [
+  { text = "is getting", correct = true },
+  { text = "gets", correct = false },
+  { text = "get", correct = false },
+  { text = "got", correct = false },
+]
+
+[[question]]
+id      = 15
+prompt  = "Sorry, I can’t talk - I ___ a report at the moment. (write)"
+explain = "«at the moment» -> <b>Present Continuous</b>: <b>am writing</b>."
+options = [
+  { text = "am writing", correct = true },
+  { text = "write", correct = false },
+  { text = "writes", correct = false },
+  { text = "wrote", correct = false },
+]
+
+[[question]]
+id      = 16
+group   = "2. Stative verbs - стан, без Continuous"
+prompt  = "I ___ what you mean now. (understand)"
+explain = "<b>understand</b> - стативне (стан розуму), <b>не</b> в Continuous: «I <b>understand</b>», ніколи «am understanding»."
+options = [
+  { text = "understand", correct = true },
+  { text = "am understanding", correct = false },
+  { text = "understands", correct = false },
+  { text = "understood", correct = false },
+]
+
+[[question]]
+id      = 17
+prompt  = "This bag ___ 200 dollars. (cost)"
+explain = "<b>cost</b> - стативне -> Present Simple <b>costs</b>. «is costing» не кажуть."
+options = [
+  { text = "costs", correct = true },
+  { text = "is costing", correct = false },
+  { text = "cost", correct = false },
+  { text = "costing", correct = false },
+]
+
+[[question]]
+id      = 18
+prompt  = "She ___ two brothers. (have)"
+explain = "<b>have</b> = «мати/володіти» - стативне: <b>has</b>. (Але «is having lunch/a shower» = дія - там Continuous можливий.)"
+options = [
+  { text = "has", correct = true },
+  { text = "is having", correct = false },
+  { text = "have", correct = false },
+  { text = "haves", correct = false },
+]
+
+[[question]]
+id      = 19
+prompt  = "I really ___ this song! (like)"
+explain = "<b>like / love / hate / prefer</b> - стативні почуття: <b>like</b>, не «am liking»."
+options = [
+  { text = "like", correct = true },
+  { text = "am liking", correct = false },
+  { text = "likes", correct = false },
+  { text = "liked", correct = false },
+]
+
+[[question]]
+id      = 20
+prompt  = "This box ___ old photos. (contain)"
+explain = "<b>contain</b> - стативне -> <b>contains</b>. Ніколи «is containing»."
+options = [
+  { text = "contains", correct = true },
+  { text = "is containing", correct = false },
+  { text = "contain", correct = false },
+  { text = "contained", correct = false },
+]
+
+[[question]]
+id      = 21
+prompt  = "He ___ to be tired today. (seem)"
+explain = "<b>seem</b> - стативне: <b>seems</b>. «is seeming» не вживають."
+options = [
+  { text = "seems", correct = true },
+  { text = "is seeming", correct = false },
+  { text = "seem", correct = false },
+  { text = "seemed", correct = false },
+]
+
+[[question]]
+id      = 22
+prompt  = "I ___ about buying a new phone. (think)"
+explain = "<b>think</b> = мати думку (стативне: «I <b>think</b> you’re right»). Але <b>be thinking about</b> = обмірковувати (дія) -> тут <b>am thinking</b>. Значення змінюється!"
+options = [
+  { text = "am thinking", correct = true },
+  { text = "think", correct = false },
+  { text = "thinks", correct = false },
+  { text = "thought", correct = false },
+]
+
+[[question]]
+id      = 23
+prompt  = "I ___ the answer to this one. (know)"
+explain = "<b>know</b> - стативне (стан знання): <b>know</b>, ніколи «am knowing»."
+options = [
+  { text = "know", correct = true },
+  { text = "am knowing", correct = false },
+  { text = "knows", correct = false },
+  { text = "knew", correct = false },
+]
+
+[[question]]
+id      = 24
+prompt  = "She ___ a new laptop for her birthday. (want)"
+explain = "<b>want</b> - стативне бажання: <b>wants</b>. Не «is wanting»."
+options = [
+  { text = "wants", correct = true },
+  { text = "is wanting", correct = false },
+  { text = "want", correct = false },
+  { text = "wanted", correct = false },
+]
+
+[[question]]
+id      = 25
+prompt  = "This umbrella ___ to me. (belong)"
+explain = "<b>belong</b> - стативне (володіння): <b>belongs</b>. Ніколи Continuous."
+options = [
+  { text = "belongs", correct = true },
+  { text = "is belonging", correct = false },
+  { text = "belong", correct = false },
+  { text = "belonged", correct = false },
+]
+
+[[question]]
+id      = 26
+prompt  = "We ___ more time to finish this. (need)"
+explain = "<b>need</b> - стативне: <b>need</b>. Не «are needing»."
+options = [
+  { text = "need", correct = true },
+  { text = "are needing", correct = false },
+  { text = "needs", correct = false },
+  { text = "needed", correct = false },
+]
+
+[[question]]
+id      = 27
+prompt  = "I ___ tea to coffee in the morning. (prefer)"
+explain = "<b>prefer</b> - стативне: <b>prefer</b>."
+options = [
+  { text = "prefer", correct = true },
+  { text = "am preferring", correct = false },
+  { text = "prefers", correct = false },
+  { text = "preferred", correct = false },
+]
+
+[[question]]
+id      = 28
+prompt  = "Honestly, I ___ every word you say. (believe)"
+explain = "<b>believe</b> - стативне: <b>believe</b>. Не «am believing»."
+options = [
+  { text = "believe", correct = true },
+  { text = "am believing", correct = false },
+  { text = "believes", correct = false },
+  { text = "believed", correct = false },
+]
+
+[[question]]
+id      = 29
+prompt  = "Try this - it ___ delicious! (taste)"
+explain = "<b>taste</b> = мати смак (стан) -> <b>tastes</b>. (Але «is tasting the soup» = пробує на смак - дія!)"
+options = [
+  { text = "tastes", correct = true },
+  { text = "is tasting", correct = false },
+  { text = "taste", correct = false },
+  { text = "tasted", correct = false },
+]
+
+[[question]]
+id      = 30
+prompt  = "I ___ you’re busy, so I’ll come back later. (see)"
+explain = "<b>see</b> = розуміти (стативне) -> <b>see</b>. (Але «is seeing a doctor» = відвідує/зустрічається - дія.)"
+options = [
+  { text = "see", correct = true },
+  { text = "am seeing", correct = false },
+  { text = "sees", correct = false },
+  { text = "saw", correct = false },
+]
+
+[[question]]
+id      = 31
+group   = "3. Past Simple vs Past Continuous - подія vs фон"
+prompt  = "While I ___ TV, the phone rang. (watch)"
+explain = "Довга фонова дія (перервана) -> <b>Past Continuous</b>: <b>was watching</b>. Дзвінок - раптова коротка -> Past Simple «rang»."
+options = [
+  { text = "was watching", correct = true },
+  { text = "watched", correct = false },
+  { text = "am watching", correct = false },
+  { text = "watch", correct = false },
+]
+
+[[question]]
+id      = 32
+prompt  = "When the phone rang, I ___ it at once. (answer)"
+explain = "Коротка завершена реакція -> <b>Past Simple</b>: <b>answered</b>."
+options = [
+  { text = "answered", correct = true },
+  { text = "was answering", correct = false },
+  { text = "answer", correct = false },
+  { text = "have answered", correct = false },
+]
+
+[[question]]
+id      = 33
+prompt  = "They ___ football when it started to snow. (play)"
+explain = "Дія в процесі, коли сталася інша -> <b>Past Continuous</b>: <b>were playing</b>."
+options = [
+  { text = "were playing", correct = true },
+  { text = "played", correct = false },
+  { text = "are playing", correct = false },
+  { text = "play", correct = false },
+]
+
+[[question]]
+id      = 34
+prompt  = "I ___ my keys yesterday. (lose)"
+explain = "Завершена подія з часом «yesterday» -> <b>Past Simple</b>: <b>lost</b>."
+options = [
+  { text = "lost", correct = true },
+  { text = "was losing", correct = false },
+  { text = "have lost", correct = false },
+  { text = "was lost", correct = false },
+]
+
+[[question]]
+id      = 35
+prompt  = "At 8 p.m. last night we ___ dinner. (have)"
+explain = "Дія в конкретний момент минулого (at 8 p.m.) -> <b>Past Continuous</b>: <b>were having</b> (вечеря в розпалі). Тут «have» = їсти = динамічне."
+options = [
+  { text = "were having", correct = true },
+  { text = "had", correct = false },
+  { text = "have had", correct = false },
+  { text = "are having", correct = false },
+]
+
+[[question]]
+id      = 36
+prompt  = "She ___ the door and went out. (open)"
+explain = "Послідовні завершені дії -> <b>Past Simple</b>: <b>opened</b> … went. Continuous розірвав би послідовність."
+options = [
+  { text = "opened", correct = true },
+  { text = "was opening", correct = false },
+  { text = "opens", correct = false },
+  { text = "has opened", correct = false },
+]
+
+[[question]]
+id      = 37
+prompt  = "The sun ___ while we walked on the beach. (shine)"
+explain = "Фон/декорація сцени -> <b>Past Continuous</b>: <b>was shining</b>."
+options = [
+  { text = "was shining", correct = true },
+  { text = "shone", correct = false },
+  { text = "shines", correct = false },
+  { text = "shined", correct = false },
+]
+
+[[question]]
+id      = 38
+prompt  = "I ___ a shower when the doorbell rang. (take)"
+explain = "Тривала дія, перервана дзвінком -> <b>Past Continuous</b>: <b>was taking</b>."
+options = [
+  { text = "was taking", correct = true },
+  { text = "took", correct = false },
+  { text = "take", correct = false },
+  { text = "have taken", correct = false },
+]
+
+[[question]]
+id      = 39
+prompt  = "While I was cooking, the kids ___ in the garden. (play)"
+explain = "Дві паралельні тривалі дії (while) -> обидві Past Continuous: <b>were playing</b>."
+options = [
+  { text = "were playing", correct = true },
+  { text = "played", correct = false },
+  { text = "play", correct = false },
+  { text = "are playing", correct = false },
+]
+
+[[question]]
+id      = 40
+prompt  = "He got up, ___ his teeth and left. (brush)"
+explain = "Послідовні завершені дії -> <b>Past Simple</b>: <b>brushed</b>."
+options = [
+  { text = "brushed", correct = true },
+  { text = "was brushing", correct = false },
+  { text = "brushes", correct = false },
+  { text = "has brushed", correct = false },
+]
+
+[[question]]
+id      = 41
+prompt  = "I ___ my leg while I was skiing. (break)"
+explain = "Раптова коротка подія під час тривалої -> <b>Past Simple</b>: <b>broke</b>; «was skiing» - фон."
+options = [
+  { text = "broke", correct = true },
+  { text = "was breaking", correct = false },
+  { text = "break", correct = false },
+  { text = "have broken", correct = false },
+]
+
+[[question]]
+id      = 42
+prompt  = "When I ___ in, everyone stood up. (come)"
+explain = "Дві завершені події одна за одною -> <b>Past Simple</b>: <b>came</b> … stood up."
+options = [
+  { text = "came", correct = true },
+  { text = "was coming", correct = false },
+  { text = "come", correct = false },
+  { text = "has come", correct = false },
+]
+
+[[question]]
+id      = 43
+prompt  = "At midnight it ___ heavily, so we stayed in. (rain)"
+explain = "Дія в процесі в певний момент (at midnight) -> <b>Past Continuous</b>: <b>was raining</b>."
+options = [
+  { text = "was raining", correct = true },
+  { text = "rained", correct = false },
+  { text = "rains", correct = false },
+  { text = "is raining", correct = false },
+]
+
+[[question]]
+id      = 44
+prompt  = "As I ___ down the street, I met an old friend. (walk)"
+explain = "Фонова дія («as I was walking») -> <b>Past Continuous</b>: <b>was walking</b>; met -> Past Simple."
+options = [
+  { text = "was walking", correct = true },
+  { text = "walked", correct = false },
+  { text = "walk", correct = false },
+  { text = "have walked", correct = false },
+]
+
+[[question]]
+id      = 45
+prompt  = "She ___ the whole book in one evening. (read)"
+explain = "Завершена дія з результатом (whole book) -> <b>Past Simple</b>: <b>read</b> (тут читається «red»)."
+options = [
+  { text = "read", correct = true },
+  { text = "was reading", correct = false },
+  { text = "reads", correct = false },
+  { text = "has read", correct = false },
+]
+
+[[question]]
+id      = 46
+group   = "4. Змішане - маркери й пастки"
+prompt  = "He always ___ his phone at dinner - so annoying! (check)"
+explain = "<b>always + Present Continuous</b> = роздратування від повторюваної дії: <b>is always checking</b>. (Нейтральна звичка була б «always checks».)"
+options = [
+  { text = "is always checking", correct = true },
+  { text = "always checks", correct = false },
+  { text = "checks always", correct = false },
+  { text = "checked", correct = false },
+]
+
+[[question]]
+id      = 47
+prompt  = "Right now the kids ___ in the garden. (play)"
+explain = "«right now» -> <b>Present Continuous</b>: <b>are playing</b>."
+options = [
+  { text = "are playing", correct = true },
+  { text = "play", correct = false },
+  { text = "plays", correct = false },
+  { text = "played", correct = false },
+]
+
+[[question]]
+id      = 48
+prompt  = "Every summer we ___ to Italy. (travel)"
+explain = "Повторювана звичка (every summer) -> <b>Present Simple</b>: <b>travel</b>."
+options = [
+  { text = "travel", correct = true },
+  { text = "are travelling", correct = false },
+  { text = "travels", correct = false },
+  { text = "travelled", correct = false },
+]
+
+[[question]]
+id      = 49
+prompt  = "While she ___, someone stole her bag. (shop)"
+explain = "Фонова тривала дія + раптова подія -> <b>Past Continuous</b>: <b>was shopping</b>; «stole» -> Past Simple."
+options = [
+  { text = "was shopping", correct = true },
+  { text = "shopped", correct = false },
+  { text = "shops", correct = false },
+  { text = "is shopping", correct = false },
+]
+
+[[question]]
+id      = 50
+prompt  = "Listen! Someone ___ the piano. (play)"
+explain = "«Listen!» = саме зараз -> <b>Present Continuous</b>: <b>is playing</b>."
+options = [
+  { text = "is playing", correct = true },
+  { text = "plays", correct = false },
+  { text = "play", correct = false },
+  { text = "played", correct = false },
+]
+
+[[question]]
+id      = 51
+prompt  = "I ___ her immediately when I saw her. (recognize)"
+explain = "<b>recognize</b> - стативне, не Continuous навіть у минулому: <b>recognized</b>."
+options = [
+  { text = "recognized", correct = true },
+  { text = "was recognizing", correct = false },
+  { text = "recognize", correct = false },
+  { text = "recognizes", correct = false },
+]
+
+[[question]]
+id      = 52
+prompt  = "He ___ French at university this year. (study)"
+explain = "Тимчасово, обмежений період (this year) -> <b>Present Continuous</b>: <b>is studying</b>."
+options = [
+  { text = "is studying", correct = true },
+  { text = "studies", correct = false },
+  { text = "study", correct = false },
+  { text = "studied", correct = false },
+]
+
+[[question]]
+id      = 53
+prompt  = "These days I ___ to work instead of driving. (cycle)"
+explain = "«these days» = тимчасова тенденція -> <b>Present Continuous</b>: <b>am cycling</b>."
+options = [
+  { text = "am cycling", correct = true },
+  { text = "cycle", correct = false },
+  { text = "cycles", correct = false },
+  { text = "cycled", correct = false },
+]
+
+[[question]]
+id      = 54
+prompt  = "Normally I drink tea, but this week I ___ coffee. (drink)"
+explain = "Тимчасовий виняток зі звички (this week) -> <b>Present Continuous</b>: <b>am drinking</b>."
+options = [
+  { text = "am drinking", correct = true },
+  { text = "drink", correct = false },
+  { text = "drinks", correct = false },
+  { text = "drank", correct = false },
+]
+
+[[question]]
+id      = 55
+prompt  = "When I was a child, we ___ to the sea every summer. (go)"
+explain = "Повторювана дія в минулому -> <b>Past Simple</b>: <b>went</b> (минула звичка)."
+options = [
+  { text = "went", correct = true },
+  { text = "were going", correct = false },
+  { text = "go", correct = false },
+  { text = "was going", correct = false },
+]
+
+[[question]]
+id      = 56
+prompt  = "I ___ this is a brilliant idea. (think)"
+explain = "<b>think</b> = мати думку (стативне) -> <b>think</b>. Тут «вважаю», а не «обмірковую»."
+options = [
+  { text = "think", correct = true },
+  { text = "am thinking", correct = false },
+  { text = "thinks", correct = false },
+  { text = "thought", correct = false },
+]
+
+[[question]]
+id      = 57
+prompt  = "Look at him - he ___ at us! (wave)"
+explain = "«Look!» = саме зараз -> <b>Present Continuous</b>: <b>is waving</b>."
+options = [
+  { text = "is waving", correct = true },
+  { text = "waves", correct = false },
+  { text = "wave", correct = false },
+  { text = "waved", correct = false },
+]
+
+[[question]]
+id      = 58
+prompt  = "Water ___ into ice below 0 °C. (turn)"
+explain = "Загальний факт -> <b>Present Simple</b>: <b>turns</b>."
+options = [
+  { text = "turns", correct = true },
+  { text = "is turning", correct = false },
+  { text = "turn", correct = false },
+  { text = "turned", correct = false },
+]
+
+[[question]]
+id      = 59
+prompt  = "I ___ to call you when my phone died. (try)"
+explain = "Тривала дія, перервана подією -> <b>Past Continuous</b>: <b>was trying</b>; «died» -> Past Simple."
+options = [
+  { text = "was trying", correct = true },
+  { text = "tried", correct = false },
+  { text = "try", correct = false },
+  { text = "am trying", correct = false },
+]
+
+[[question]]
+id      = 60
+prompt  = "He ___ never on time for meetings. (be)"
+explain = "<b>be</b> зазвичай стативне -> <b>is</b>. («is being» = поводиться тимчасово: «he is being rude».)"
+options = [
+  { text = "is", correct = true },
+  { text = "is being", correct = false },
+  { text = "are", correct = false },
+  { text = "was", correct = false },
 ]
