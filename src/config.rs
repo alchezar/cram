@@ -14,6 +14,8 @@ pub struct Config {
     pub port: u16,
     /// Directory of static files to serve.
     pub web_dir: PathBuf,
+    /// Directory of quiz TOML files.
+    pub quizzes_dir: PathBuf,
 }
 
 impl Config {

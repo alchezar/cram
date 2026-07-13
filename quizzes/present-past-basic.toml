@@ -1,0 +1,47 @@
+# quizzes/present-past-basic.toml
+
+title   = "Present & Past Simple/Continuous"
+section = "Tenses"
+kind    = "multi"
+intro   = "Present Simple - факти й звички. Continuous - дія прямо зараз."
+
+[[question]]
+id      = 1
+prompt  = "Water ___ at 100 °C. (boil)"
+explain = "Загальний факт -> Present Simple: <b>boils</b>. «is boiling» = саме зараз."
+options = [
+  { text = "boils",      correct = true  },
+  { text = "is boiling", correct = false },
+  { text = "boil",       correct = false },
+  { text = "boiled",     correct = false },
+]
+
+[[question]]
+id      = 2
+prompt  = "Look! It ___ outside. (rain)"
+explain = "«Look!» = саме зараз -> Present Continuous: <b>is raining</b>."
+options = [
+  { text = "is raining", correct = true  },
+  { text = "rains",      correct = false },
+  { text = "rain",       correct = false },
+]
+
+[[question]]
+id      = 3
+prompt  = "She ___ to the gym every Monday. (go)"
+explain = "Звичка (every Monday) -> Present Simple: <b>goes</b>."
+options = [
+  { text = "goes",     correct = true  },
+  { text = "is going", correct = false },
+  { text = "go",       correct = false },
+]
+
+[[question]]
+id      = 4
+prompt  = "Be quiet - the baby ___. (sleep)"
+explain = "Просто зараз -> Present Continuous: <b>is sleeping</b>."
+options = [
+  { text = "is sleeping", correct = true  },
+  { text = "sleeps",      correct = false },
+  { text = "sleep",       correct = false },
+]

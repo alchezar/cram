@@ -2,6 +2,7 @@
 
 mod config;
 mod error;
+mod quiz;
 
 use std::net::SocketAddr;
 
@@ -13,7 +14,7 @@ use tokio::{net::TcpListener, signal};
 use tower_http::{services::ServeDir, set_header::SetResponseHeaderLayer, trace::TraceLayer};
 use tracing_subscriber::EnvFilter;
 
-use crate::{config::Config, error::Error};
+use crate::{config::Config, error::Error, quiz::Quizzes};
 
 #[tokio::main]
 async fn main() -> Result<(), Error> {
@@ -24,6 +25,25 @@ async fn main() -> Result<(), Error> {
         .init();
 
     let config = Config::load("cram")?;
+
+    // Smoke test for now: load quizzes and log a summary. Routes come next step.
+    let quizzes = Quizzes::load(&config.quizzes_dir)?;
+    for (id, quiz) in quizzes.iter() {
+        let explained = quiz
+            .questions
+            .iter()
+            .filter(|q| !q.explain.is_empty())
+            .count();
+        tracing::info!(
+            "quiz {id}: \"{}\" [{:?}] in {} - {}/{} explained, intro: {}",
+            quiz.title,
+            quiz.kind,
+            quiz.section,
+            explained,
+            quiz.questions.len(),
+            !quiz.intro.is_empty(),
+        );
+    }
 
     // Disable caching so browsers always fetch the latest pages.
     let no_store = SetResponseHeaderLayer::overriding(
