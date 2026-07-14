@@ -159,6 +159,7 @@ pub fn quiz_page(id: &str, quiz: &Quiz, streaks: &HashMap<u32, i64>) -> Markup {
                 title { (quiz.title) " - cram" }
                 link rel="stylesheet" href="/style.css";
                 script src="/htmx.min.js" defer {}
+                script src="/app.js" defer {}
             }
             body {
                 main .quiz data-quiz=(id) {
