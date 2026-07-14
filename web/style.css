@@ -317,3 +317,24 @@ h1 {
   color: var(--muted);
   font-size: 1.2rem;
 }
+
+.quiz-actions {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.reset {
+  background: none;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: 0.35rem;
+  padding: 0.4rem 1rem;
+  font: inherit;
+  cursor: pointer;
+}
+
+.reset:hover {
+  border-color: var(--bad);
+  color: var(--bad);
+}

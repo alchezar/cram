@@ -21,12 +21,14 @@ pub fn router(state: AppState) -> Router {
         .route("/", routing::get(index))
         .route("/quiz/{id}", routing::get(quiz_page))
         .route("/quiz/{id}/check/{qid}", routing::post(check))
+        .route("/quiz/{id}/reset", routing::post(reset))
         .with_state(state)
 }
 
-/// What a handler returns: a rendered HTML page/fragment or a 404.
+/// What a handler returns: a rendered page/fragment, an htmx redirect, or a 404.
 enum AppResponse {
     Html(Markup),
+    Redirect(String),
     NotFound(&'static str),
 }
 
@@ -34,6 +36,8 @@ impl IntoResponse for AppResponse {
     fn into_response(self) -> AxumResponse {
         match self {
             Self::Html(markup) => markup.into_response(),
+            // htmx does a full-page navigation when it sees this header.
+            Self::Redirect(to) => [("HX-Redirect", to)].into_response(),
             Self::NotFound(msg) => (StatusCode::NOT_FOUND, msg).into_response(),
         }
     }
@@ -95,4 +99,17 @@ async fn check(
             i64::from(correct)
         });
     AppResponse::Html(render::result(quiz.kind, question, correct, streak))
+}
+
+// `POST /quiz/{id}/reset`
+//
+/// Wipe this quiz's progress, then send htmx to reload the fresh quiz page.
+async fn reset(State(state): State<AppState>, Path(id): Path<String>) -> AppResponse {
+    if state.quizzes.get(&id).is_none() {
+        return AppResponse::NotFound("unknown quiz");
+    }
+    if let Err(e) = progress::reset(&state.db, &id).await {
+        tracing::error!("failed to reset progress for {id}: {e}");
+    }
+    AppResponse::Redirect(format!("/quiz/{id}"))
 }

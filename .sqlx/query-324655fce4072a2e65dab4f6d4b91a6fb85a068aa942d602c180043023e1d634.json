@@ -1,0 +1,12 @@
+{
+  "db_name": "SQLite",
+  "query": "\n            DELETE FROM mastery\n            WHERE user_id = $1 AND quiz_id = $2\n        ",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Right": 2
+    },
+    "nullable": []
+  },
+  "hash": "324655fce4072a2e65dab4f6d4b91a6fb85a068aa942d602c180043023e1d634"
+}

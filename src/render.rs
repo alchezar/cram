@@ -146,6 +146,12 @@ pub fn quiz_page(id: &str, quiz: &Quiz, streaks: &HashMap<u32, i64>) -> Markup {
                             (question(id, quiz.kind, row.question, row.streak))
                         }
                     }
+                    div .quiz-actions {
+                        button .reset
+                            hx-post=(format!("/quiz/{id}/reset"))
+                            hx-confirm="Reset all progress for this topic?"
+                            hx-swap="none" { "Reset progress" }
+                    }
                 }
             }
         }

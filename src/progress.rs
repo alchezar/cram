@@ -129,3 +129,21 @@ pub async fn mastery_totals(db: &SqlitePool) -> Result<HashMap<String, i64>, Err
     }
     Ok(totals)
 }
+
+/// Wipe all mastery for one quiz (default user), so it starts fresh.
+///
+/// # Errors
+/// Returns an error if the delete fails.
+pub async fn reset(db: &SqlitePool, quiz_id: &str) -> Result<(), Error> {
+    sqlx::query!(
+        r"
+            DELETE FROM mastery
+            WHERE user_id = $1 AND quiz_id = $2
+        ",
+        LOCAL_USER,
+        quiz_id
+    )
+    .execute(db)
+    .await?;
+    Ok(())
+}
