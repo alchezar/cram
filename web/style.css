@@ -203,12 +203,20 @@ footer {
 }
 
 .back {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.9rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
   color: var(--muted);
   text-decoration: none;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  transition: background 0.12s, border-color 0.12s, color 0.12s;
 }
 
 .back:hover {
+  border-color: var(--accent);
   color: var(--accent);
 }
 

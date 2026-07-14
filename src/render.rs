@@ -162,7 +162,7 @@ pub fn quiz_page(id: &str, quiz: &Quiz, streaks: &HashMap<u32, i64>) -> Markup {
             }
             body {
                 main .quiz data-quiz=(id) {
-                    a .back href="/" { "<- all topics" }
+                    a .back href="/" { "← all topics" }
                     h1 { (quiz.title) }
                     @if !quiz.intro.is_empty() {
                         p .intro { (quiz.intro) }
