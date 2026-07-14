@@ -7,7 +7,7 @@ mod models;
 mod render;
 mod route;
 
-use std::net::SocketAddr;
+use std::net::{IpAddr, SocketAddr, UdpSocket};
 use std::sync::Arc;
 
 use axum::{
@@ -82,6 +82,18 @@ pub async fn main() -> Result<Server, Error> {
     let addr = SocketAddr::from(([0, 0, 0, 0], config.port));
     let listener = TcpListener::bind(addr).await?;
     tracing::info!("cram listening on http://{addr}");
+    if let Some(ip) = local_ip() {
+        tracing::info!("on your network (phone): http://{ip}:{}", config.port);
+    }
 
     Ok(axum::serve(listener, app))
+}
+
+/// Best-effort LAN IP for reaching the server from another device on the same
+/// network (e.g. a phone). Connecting a UDP socket reveals the outbound route's
+/// local address without sending any packets.
+fn local_ip() -> Option<IpAddr> {
+    let socket = UdpSocket::bind(("0.0.0.0", 0)).ok()?;
+    socket.connect(("8.8.8.8", 80)).ok()?;
+    socket.local_addr().ok().map(|addr| addr.ip())
 }
