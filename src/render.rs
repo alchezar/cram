@@ -5,7 +5,7 @@ use std::collections::{BTreeMap, HashMap};
 use maud::{DOCTYPE, Markup, PreEscaped, html};
 
 use crate::{
-    progress::{HARD, SOFT},
+    db::progress::{HARD, SOFT},
     quiz::{Kind, Question, Quiz, Quizzes},
 };
 

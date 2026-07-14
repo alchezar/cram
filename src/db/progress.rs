@@ -4,10 +4,8 @@ use std::collections::HashMap;
 
 use sqlx::SqlitePool;
 
-use crate::{
-    db::{LOCAL_USER, now},
-    error::Error,
-};
+use super::{LOCAL_USER, now};
+use crate::error::Error;
 
 /// Consecutive correct answers that master a question (it then drops out).
 pub const HARD: i64 = 5;

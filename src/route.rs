@@ -13,7 +13,7 @@ use axum_extra::extract::Form;
 use maud::Markup;
 use serde::Deserialize;
 
-use crate::{AppState, progress, render};
+use crate::{AppState, db::progress, render};
 
 /// Build the application router with all routes and shared state.
 pub fn router(state: AppState) -> Router {
@@ -47,10 +47,12 @@ impl IntoResponse for AppResponse {
 //
 /// Render the index page listing every quiz by section.
 async fn index(State(state): State<AppState>) -> AppResponse {
-    let totals = progress::mastery_totals(&state.db).await.unwrap_or_else(|e| {
-        tracing::error!("failed to load mastery totals: {e}");
-        HashMap::new()
-    });
+    let totals = progress::mastery_totals(&state.db)
+        .await
+        .unwrap_or_else(|e| {
+            tracing::error!("failed to load mastery totals: {e}");
+            HashMap::new()
+        });
     AppResponse::Html(render::index_page(&state.quizzes, &totals))
 }
 

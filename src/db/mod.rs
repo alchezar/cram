@@ -1,5 +1,7 @@
 //! Progress database: connection pool, migrations, and the default user.
 
+pub mod progress;
+
 use std::fs;
 use std::str::FromStr;
 use std::time::{SystemTime, UNIX_EPOCH};
