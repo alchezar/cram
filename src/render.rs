@@ -3,6 +3,7 @@
 use std::collections::HashMap;
 
 use maud::{DOCTYPE, Markup, PreEscaped, html};
+use rand::seq::SliceRandom;
 
 use crate::{
     db::progress::{HARD, SOFT},
@@ -118,30 +119,35 @@ struct Row<'a> {
 
 /// Full HTML page for one quiz. Mastered questions (streak >= `HARD`) are hidden.
 pub fn quiz_page(id: &str, quiz: &Quiz, streaks: &HashMap<u32, i64>) -> Markup {
-    // Visible questions with an optional group heading. The section is carried
-    // forward so its heading still shows even if its first question is mastered.
-    let mut rows = Vec::<Row<'_>>::new();
-    let mut section = "";
-    let mut shown = "";
+    // Segment questions into groups (a non-empty group name starts a new one),
+    // shuffle within each group, then show the heading before its first visible
+    // question. Mastered questions (streak >= HARD) are dropped.
+    let mut groups = Vec::<(&str, Vec<&Question>)>::new();
     for q in &quiz.questions {
-        if !q.group.is_empty() {
-            section = q.group.as_str();
+        if groups.is_empty() || !q.group.is_empty() {
+            groups.push((q.group.as_str(), Vec::new()));
         }
-        let streak = streaks.get(&q.id).copied().unwrap_or(0);
-        if streak >= HARD {
-            continue;
+        if let Some(group) = groups.last_mut() {
+            group.1.push(q);
         }
-        let heading = if !section.is_empty() && section != shown {
-            shown = section;
-            Some(section)
-        } else {
-            None
-        };
-        rows.push(Row {
-            heading,
-            question: q,
-            streak,
-        });
+    }
+
+    let mut rng = rand::rng();
+    let mut rows = Vec::<Row<'_>>::new();
+    for (name, questions) in &mut groups {
+        questions.shuffle(&mut rng);
+        let mut heading = (!name.is_empty()).then_some(*name);
+        for &q in questions.iter() {
+            let streak = streaks.get(&q.id).copied().unwrap_or(0);
+            if streak >= HARD {
+                continue;
+            }
+            rows.push(Row {
+                heading: heading.take(),
+                question: q,
+                streak,
+            });
+        }
     }
 
     html! {
@@ -190,6 +196,9 @@ pub fn quiz_page(id: &str, quiz: &Quiz, streaks: &HashMap<u32, i64>) -> Markup {
 /// that posts to the check endpoint and swaps the result into `.result`.
 fn question(id: &str, kind: Kind, q: &Question, streak: i64) -> Markup {
     let action = format!("/quiz/{id}/check/{}", q.id);
+    // Shuffle the display order; each option's `value` keeps its original index.
+    let mut order = (0..q.options.len()).collect::<Vec<_>>();
+    order.shuffle(&mut rand::rng());
     html! {
         section .question data-qid=(q.id) {
             p .prompt { (q.prompt) " " span id=(format!("stars-{}", q.id)) { (stars(streak)) } }
@@ -198,7 +207,8 @@ fn question(id: &str, kind: Kind, q: &Question, streak: i64) -> Markup {
                     @match kind {
                         Kind::Multi | Kind::Single => {
                             @let ty = if matches!(kind, Kind::Multi) { "checkbox" } else { "radio" };
-                            @for (i, o) in q.options.iter().enumerate() {
+                            @for &i in &order {
+                                @let o = &q.options[i];
                                 label .option {
                                     input type=(ty) name="opt" value=(i);
                                     span { (o.text) }
