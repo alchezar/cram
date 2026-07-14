@@ -54,7 +54,8 @@ pub async fn main() -> Result<Server, Error> {
         )
         .init();
 
-    let config = Config::load("cram")?;
+    config::anchor_to_exe_dir();
+    let config = Config::load()?;
 
     let quizzes = Arc::new(Quizzes::load(&config.quizzes_dir)?);
     tracing::info!("loaded {} quizzes", quizzes.iter().count());

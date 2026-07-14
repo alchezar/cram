@@ -1,6 +1,9 @@
 SHELL := /bin/bash
 LOAD_ENV := set -eo pipefail; set -a; source ./.env; set +a;
 
+# Where 'make install' puts the self-contained bundle (override: PREFIX=path)
+PREFIX ?= $(HOME)/.cargo/cram
+
 .PHONY: help
 # Environment
 .PHONY: migrate migrate-reset
@@ -9,7 +12,7 @@ LOAD_ENV := set -eo pipefail; set -a; source ./.env; set +a;
 # Testing
 .PHONY: test test-one test-in test-not
 # Development
-.PHONY: build release dev run clean
+.PHONY: build release install dev run clean
 
 # Help -------------------------------------------------------------------------
 
@@ -85,6 +88,21 @@ release: ## Build release binary and copy to project root
 	@cargo build --bin cram --release
 	@cp target/release/cram .
 	@echo "[+] Built."
+
+install: ## Install a self-contained bundle to $(PREFIX) and symlink cram into ~/.cargo/bin
+	@echo "[*] Building (release)..."
+	@test -f cram.toml || (echo "[!] Error: cram.toml not found" && exit 1)
+	@cargo build --bin cram --release
+	@echo "[*] Installing bundle into $(PREFIX)/ ..."
+	@rm -rf "$(PREFIX)"
+	@mkdir -p "$(PREFIX)"
+	@cp target/release/cram "$(PREFIX)/"
+	@cp cram.toml "$(PREFIX)/cram.toml"
+	@cp roadmap.toml "$(PREFIX)/"
+	@cp -R quizzes web "$(PREFIX)/"
+	@mkdir -p "$(HOME)/.cargo/bin"
+	@ln -sf "$(PREFIX)/cram" "$(HOME)/.cargo/bin/cram"
+	@echo "[+] Installed. Run 'cram' from anywhere (needs ~/.cargo/bin on PATH)."
 
 dev: ## Run in debug mode with .env loaded
 	@echo "[*] Running (debug)..."
