@@ -2,6 +2,7 @@
 :root {
   --bg: #262626;
   --surface: #333333;
+  --rule-bg: #2E2E2E;
   --black: #181818;
   --fg: #DCDCDC;
   --muted: #ABB2BF;
@@ -296,15 +297,20 @@ h1 {
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  padding: 0.4rem 0.6rem;
-  border: 1px solid transparent;
-  border-radius: 0.35rem;
+  padding: 0.55rem 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
   cursor: pointer;
+  transition: background 0.12s, border-color 0.12s;
 }
 
 .option:hover {
-  border-color: var(--border);
-  background: var(--black);
+  background: var(--rule-bg);
+}
+
+.option:has(input:checked) {
+  border-color: var(--accent);
+  background: var(--rule-bg);
 }
 
 .option input {
@@ -334,18 +340,19 @@ h1 {
 
 .check {
   align-self: flex-start;
-  padding: 0.45rem 1.1rem;
-  background: var(--accent);
-  color: var(--black);
-  border: none;
-  border-radius: 0.35rem;
+  padding: 0.4rem 1.1rem;
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 0.5rem;
   font: inherit;
   font-weight: 600;
   cursor: pointer;
+  transition: background 0.12s;
 }
 
 .check:hover {
-  filter: brightness(1.08);
+  background: var(--rule-bg);
 }
 
 .result:empty {
