@@ -221,7 +221,7 @@ fn question(id: &str, kind: Kind, q: &Question, streak: i64) -> Markup {
                         }
                     }
                 }
-                button .check type="submit" { "Check" }
+                (check_button(q, false))
                 div .result {}
             }
         }
@@ -250,8 +250,21 @@ pub fn result(kind: Kind, q: &Question, correct: bool, streak: i64) -> Markup {
                 p .mastered { "Mastered - it leaves the quiz on reload." }
             }
         }
-        // Out-of-band swap: refresh the stars shown next to the prompt too.
+        // Out-of-band swaps: refresh the stars next to the prompt, and retire
+        // the Check button so a re-click can't bump the streak again.
         span id=(format!("stars-{}", q.id)) hx-swap-oob="true" { (stars(streak)) }
+        (check_button(q, true))
+    }
+}
+
+/// The Check button for one question. The `checked` variant is disabled and
+/// carries the out-of-band marker, so it replaces the live button in place.
+fn check_button(q: &Question, checked: bool) -> Markup {
+    html! {
+        button .check id=(format!("check-{}", q.id)) type="submit"
+            disabled[checked] hx-swap-oob=[checked.then_some("true")] {
+            @if checked { "Checked" } @else { "Check" }
+        }
     }
 }
 

@@ -360,8 +360,14 @@ h1 {
   transition: background 0.12s;
 }
 
-.check:hover {
+.check:hover:not(:disabled) {
   background: var(--rule-bg);
+}
+
+.check:disabled {
+  color: var(--muted);
+  border-color: var(--border);
+  cursor: default;
 }
 
 .result:empty {
