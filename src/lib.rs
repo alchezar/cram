@@ -59,9 +59,8 @@ pub async fn main() -> Result<Server, Error> {
     let quizzes = Arc::new(Quizzes::load(&config.quizzes_dir)?);
     tracing::info!("loaded {} quizzes", quizzes.iter().count());
     let roadmap = Arc::new(Roadmap::load(&config.roadmap_file)?);
-    let db = db::connect(&config.database_url).await?;
+    let db = db::connect(config.database_url.as_deref()).await?;
 
-    tracing::info!("progress database ready at {}", config.database_url);
     let state = AppState {
         quizzes,
         roadmap,

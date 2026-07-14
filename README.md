@@ -26,15 +26,20 @@ database connection.
 ## Setup
 
 ```bash
-cp cram.toml.example cram.toml     # then edit database_url for your machine
+cp cram.toml.example cram.toml
 ```
 
-`database_url` points at a SQLite file (created on first run). For the `make`
-targets that touch the database (`migrate`, `prepare`, `dev`, `test`), also add a
-`.env` with the same URL:
+By default the database is created under the platform data dir on first run
+(macOS `~/Library/Application Support/cram/cram.db`, Linux
+`~/.local/share/cram/cram.db`), so no path needs configuring. Set `database_url`
+in `cram.toml` only to override that location.
+
+The `make` targets that touch the database (`migrate`, `prepare`, `dev`, `test`)
+use compile-time sqlx macros and still need a `.env`. Copy the example; its
+`DATABASE_URL` uses `${HOME}`, so no path editing is needed on most machines:
 
 ```bash
-echo 'DATABASE_URL=sqlite:/absolute/path/to/cram.db?mode=rwc' > .env
+cp .env.example .env
 ```
 
 ## Build and run

@@ -50,6 +50,7 @@ prepare: ## Generate SQLx offline query metadata for CI builds (bash/zsh)
 	@echo "[*] Generating SQLx offline query metadata..."
 	@test -f .env || (echo "Error: .env file not found" && exit 1)
 	@$(LOAD_ENV)                                                               \
+		SQLX_OFFLINE=false                                                     \
 		CARGO_TERM_COLOR=always cargo                                          \
 		sqlx prepare -- --all-features --tests 2>&1                            \
 		| grep -v 'query data written'

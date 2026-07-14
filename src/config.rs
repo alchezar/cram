@@ -18,8 +18,10 @@ pub struct Config {
     pub quizzes_dir: PathBuf,
     /// Path to the index roadmap TOML file.
     pub roadmap_file: PathBuf,
-    /// sqlx connection URL for the progress database.
-    pub database_url: String,
+    /// sqlx connection URL for the progress database. When omitted, a default
+    /// path under the platform data dir is used (see `db::connect`).
+    #[serde(default)]
+    pub database_url: Option<String>,
 }
 
 impl Config {
