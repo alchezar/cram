@@ -31,7 +31,7 @@ pub fn index_page(roadmap: &Roadmap, quizzes: &Quizzes, totals: &HashMap<String,
         .unwrap_or(0);
     html! {
         (DOCTYPE)
-        html lang="uk" {
+        html lang="en" {
             head {
                 meta charset="utf-8";
                 meta name="viewport" content="width=device-width, initial-scale=1";
@@ -43,7 +43,7 @@ pub fn index_page(roadmap: &Roadmap, quizzes: &Quizzes, totals: &HashMap<String,
                     h1 { (roadmap.title) }
                     p .lead { (roadmap.lead) }
                     div .prog {
-                        "Готово: " b { (live) } " / " b { (total) } " тем · опановуй по черзі."
+                        "Ready: " b { (live) } " / " b { (total) } " topics · work through them one by one."
                     }
                     div .mbar { div .mbar-fill style=(format!("width:{overall}%")) {} }
                     @for section in &roadmap.sections {

@@ -1,9 +1,9 @@
 # Index roadmap: B2 grammar topics grouped into sections.
 # A topic with `quiz` is live (links to that quiz id); without it, it is "Planned".
 
-title  = "Англійська B2 - тренажери граматики"
-lead   = "Набір інтерактивних квізів під рівень FCE (B2). Тисни на готову тему, щоб почати тренування."
-footer = "Локальний сервер, офлайн. Прогрес зберігається в локальній базі."
+title  = "English B2 - Grammar Trainers"
+lead   = "A set of interactive quizzes for the FCE (B2) level. Tap a ready topic to start practising."
+footer = "Local server. Progress is stored in a local database."
 
 [[section]]
 name = "Tenses"
