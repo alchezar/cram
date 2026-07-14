@@ -4,17 +4,38 @@ use std::collections::{BTreeMap, HashMap};
 
 use maud::{DOCTYPE, Markup, PreEscaped, html};
 
-use crate::progress::{HARD, SOFT};
-use crate::quiz::{Kind, Question, Quiz, Quizzes};
+use crate::{
+    progress::{HARD, SOFT},
+    quiz::{Kind, Question, Quiz, Quizzes},
+};
 
-/// Index page: all quizzes grouped by section.
-pub fn index_page(quizzes: &Quizzes) -> Markup {
-    let mut sections = BTreeMap::<&str, Vec<(&str, &str)>>::new();
+/// A quiz on the index with its mastery percentage (0..=100).
+struct Topic<'a> {
+    id: &'a str,
+    title: &'a str,
+    percent: u8,
+}
+
+/// Index page: all quizzes grouped by section, each with a mastery bar.
+pub fn index_page(quizzes: &Quizzes, totals: &HashMap<String, i64>) -> Markup {
+    let mut sections = BTreeMap::<&str, Vec<Topic<'_>>>::new();
     for (id, quiz) in quizzes.iter() {
+        let count = i64::try_from(quiz.questions.len()).unwrap_or(0);
+        let capped = totals.get(id.as_str()).copied().unwrap_or(0);
+        // Percentage of full mastery: capped streaks over count * HARD.
+        let percent = if count > 0 {
+            u8::try_from(capped * 100 / (count * HARD)).unwrap_or(100)
+        } else {
+            0
+        };
         sections
             .entry(quiz.section.as_str())
             .or_default()
-            .push((id.as_str(), quiz.title.as_str()));
+            .push(Topic {
+                id: id.as_str(),
+                title: quiz.title.as_str(),
+                percent,
+            });
     }
     html! {
         (DOCTYPE)
@@ -32,14 +53,27 @@ pub fn index_page(quizzes: &Quizzes) -> Markup {
                         section .group {
                             h2 { (name) }
                             ul .topics {
-                                @for (id, title) in topics {
-                                    li { a href=(format!("/quiz/{id}")) { (title) } }
+                                @for topic in topics {
+                                    li { (topic_link(topic)) }
                                 }
                             }
                         }
                     }
                 }
             }
+        }
+    }
+}
+
+/// One index entry: a card linking to the quiz with a mastery progress bar.
+fn topic_link(topic: &Topic<'_>) -> Markup {
+    html! {
+        a href=(format!("/quiz/{}", topic.id)) {
+            span .topic-head {
+                span .topic-name { (topic.title) }
+                span .topic-pct { (topic.percent) "%" }
+            }
+            span .bar { span .bar-fill style=(format!("width:{}%", topic.percent)) {} }
         }
     }
 }

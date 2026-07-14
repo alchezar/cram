@@ -4,8 +4,10 @@ use std::collections::HashMap;
 
 use sqlx::SqlitePool;
 
-use crate::db::{LOCAL_USER, now};
-use crate::error::Error;
+use crate::{
+    db::{LOCAL_USER, now},
+    error::Error,
+};
 
 /// Consecutive correct answers that master a question (it then drops out).
 pub const HARD: i64 = 5;
@@ -103,4 +105,27 @@ pub async fn streaks(db: &SqlitePool, quiz_id: &str) -> Result<HashMap<u32, i64>
         }
     }
     Ok(map)
+}
+
+/// Capped mastery total per quiz: `sum(min(streak, HARD))` keyed by quiz id.
+/// A quiz's percentage is this over `question_count * HARD`.
+///
+/// # Errors
+/// Returns an error if the query fails.
+pub async fn mastery_totals(db: &SqlitePool) -> Result<HashMap<String, i64>, Error> {
+    let rows = sqlx::query!(
+        r"
+            SELECT quiz_id, streak FROM mastery
+            WHERE user_id = $1
+        ",
+        LOCAL_USER
+    )
+    .fetch_all(db)
+    .await?;
+
+    let mut totals = HashMap::new();
+    for row in rows {
+        *totals.entry(row.quiz_id).or_insert(0) += row.streak.min(HARD);
+    }
+    Ok(totals)
 }

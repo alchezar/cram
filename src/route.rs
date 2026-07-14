@@ -43,7 +43,11 @@ impl IntoResponse for AppResponse {
 //
 /// Render the index page listing every quiz by section.
 async fn index(State(state): State<AppState>) -> AppResponse {
-    AppResponse::Html(render::index_page(&state.quizzes))
+    let totals = progress::mastery_totals(&state.db).await.unwrap_or_else(|e| {
+        tracing::error!("failed to load mastery totals: {e}");
+        HashMap::new()
+    });
+    AppResponse::Html(render::index_page(&state.quizzes, &totals))
 }
 
 // `GET /quiz/{id}`
