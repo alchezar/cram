@@ -7,18 +7,20 @@ mod quiz;
 mod render;
 mod route;
 
-use std::future::Future;
 use std::net::SocketAddr;
 use std::sync::Arc;
 
-use axum::http::{HeaderValue, header};
+use axum::{
+    Router,
+    http::{HeaderValue, header},
+    serve::Serve,
+};
 use sqlx::SqlitePool;
 use tokio::net::TcpListener;
 use tower_http::{services::ServeDir, set_header::SetResponseHeaderLayer, trace::TraceLayer};
 use tracing_subscriber::EnvFilter;
 
-use crate::config::Config;
-use crate::quiz::Quizzes;
+use crate::{config::Config, quiz::Quizzes};
 
 pub use crate::error::Error;
 
@@ -31,15 +33,16 @@ pub(crate) struct AppState {
     pub(crate) db: SqlitePool,
 }
 
-/// Load config and quizzes, open the database, and serve requests until the
-/// `shutdown` future resolves.
+/// A bound-but-not-yet-serving axum server for this app.
+type Server = Serve<TcpListener, Router, Router>;
+
+/// Load config and quizzes, open the database, and bind the listener.
+/// Returns the ready-to-run server; the caller drives it (e.g. with graceful
+/// shutdown) and can read its address via `Serve::local_addr`.
 ///
 /// # Errors
 /// Returns an error if config, quiz loading, the database, or binding fails.
-pub async fn main<F>(shutdown: F) -> Result<(), Error>
-where
-    F: Future<Output = ()> + Send + 'static,
-{
+pub async fn main() -> Result<Server, Error> {
     tracing_subscriber::fmt()
         .with_env_filter(
             EnvFilter::try_from_default_env().unwrap_or_else(|_| EnvFilter::new("info")),
@@ -70,9 +73,5 @@ where
     let listener = TcpListener::bind(addr).await?;
     tracing::info!("cram listening on http://{addr}");
 
-    axum::serve(listener, app)
-        .with_graceful_shutdown(shutdown)
-        .await?;
-
-    Ok(())
+    Ok(axum::serve(listener, app))
 }
