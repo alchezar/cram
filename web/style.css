@@ -255,3 +255,36 @@ h1 {
 .explain {
   margin: 0.5rem 0 0;
 }
+
+.streak {
+  margin-left: 0.5rem;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+.streak .on {
+  color: var(--good);
+}
+
+.streak .off {
+  color: var(--border);
+}
+
+.streak .div {
+  opacity: 0.5;
+  margin: 0 2px;
+}
+
+.mastered {
+  margin: 0.5rem 0 0;
+  color: var(--good);
+  font-weight: 600;
+}
+
+.done {
+  padding: 2.5rem 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 1.2rem;
+}

@@ -1,5 +1,7 @@
 //! HTTP routes and their handlers.
 
+use std::collections::HashMap;
+
 use axum::{
     Router,
     extract::{Path, State},
@@ -48,10 +50,14 @@ async fn index(State(state): State<AppState>) -> AppResponse {
 //
 /// Render one quiz page, or 404 if the id is unknown.
 async fn quiz_page(State(state): State<AppState>, Path(id): Path<String>) -> AppResponse {
-    match state.quizzes.get(&id) {
-        Some(quiz) => AppResponse::Html(render::quiz_page(&id, quiz)),
-        None => AppResponse::NotFound("unknown quiz"),
-    }
+    let Some(quiz) = state.quizzes.get(&id) else {
+        return AppResponse::NotFound("unknown quiz");
+    };
+    let streaks = progress::streaks(&state.db, &id).await.unwrap_or_else(|e| {
+        tracing::error!("failed to load streaks for {id}: {e}");
+        HashMap::new()
+    });
+    AppResponse::Html(render::quiz_page(&id, quiz, &streaks))
 }
 
 /// A submitted answer: selected option indices (multi/single) or free text.
@@ -78,8 +84,11 @@ async fn check(
         return AppResponse::NotFound("unknown question");
     };
     let correct = question.is_correct(quiz.kind, &answer.opt, &answer.answer);
-    if let Err(e) = progress::record(&state.db, &id, qid, correct).await {
-        tracing::error!("failed to record progress for {id}/{qid}: {e}");
-    }
-    AppResponse::Html(render::result(quiz.kind, question, correct))
+    let streak = progress::record(&state.db, &id, qid, correct)
+        .await
+        .unwrap_or_else(|e| {
+            tracing::error!("failed to record progress for {id}/{qid}: {e}");
+            i64::from(correct)
+        });
+    AppResponse::Html(render::result(quiz.kind, question, correct, streak))
 }

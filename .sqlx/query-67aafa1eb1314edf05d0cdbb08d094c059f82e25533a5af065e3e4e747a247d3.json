@@ -1,0 +1,26 @@
+{
+  "db_name": "SQLite",
+  "query": "\n            SELECT streak FROM mastery\n            WHERE user_id = $1 AND quiz_id = $2 AND question_id = $3\n        ",
+  "describe": {
+    "columns": [
+      {
+        "name": "streak",
+        "ordinal": 0,
+        "type_info": "Integer",
+        "origin": {
+          "Table": {
+            "table": "mastery",
+            "name": "streak"
+          }
+        }
+      }
+    ],
+    "parameters": {
+      "Right": 3
+    },
+    "nullable": [
+      false
+    ]
+  },
+  "hash": "67aafa1eb1314edf05d0cdbb08d094c059f82e25533a5af065e3e4e747a247d3"
+}
