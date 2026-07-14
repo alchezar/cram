@@ -1,79 +1,107 @@
 //! HTML rendering with maud.
 
-use std::collections::{BTreeMap, HashMap};
+use std::collections::HashMap;
 
 use maud::{DOCTYPE, Markup, PreEscaped, html};
 
 use crate::{
     db::progress::{HARD, SOFT},
-    quiz::{Kind, Question, Quiz, Quizzes},
+    models::{
+        quiz::{Kind, Question, Quiz, Quizzes},
+        roadmap::{Roadmap, Topic},
+    },
 };
 
-/// A quiz on the index with its mastery percentage (0..=100).
-struct Topic<'a> {
-    id: &'a str,
-    title: &'a str,
-    percent: u8,
-}
-
-/// Index page: all quizzes grouped by section, each with a mastery bar.
-pub fn index_page(quizzes: &Quizzes, totals: &HashMap<String, i64>) -> Markup {
-    let mut sections = BTreeMap::<&str, Vec<Topic<'_>>>::new();
-    for (id, quiz) in quizzes.iter() {
-        let count = i64::try_from(quiz.questions.len()).unwrap_or(0);
-        let capped = totals.get(id.as_str()).copied().unwrap_or(0);
-        // Percentage of full mastery: capped streaks over count * HARD.
-        let percent = if count > 0 {
-            u8::try_from(capped * 100 / (count * HARD)).unwrap_or(100)
-        } else {
-            0
-        };
-        sections
-            .entry(quiz.section.as_str())
-            .or_default()
-            .push(Topic {
-                id: id.as_str(),
-                title: quiz.title.as_str(),
-                percent,
-            });
-    }
+/// Index page: the roadmap of B2 topics with overall and per-topic progress.
+pub fn index_page(roadmap: &Roadmap, quizzes: &Quizzes, totals: &HashMap<String, i64>) -> Markup {
+    let total = roadmap.topics().count();
+    // Live = topics backed by a quiz that actually exists.
+    let live = roadmap
+        .topics()
+        .filter(|t| {
+            t.quiz
+                .as_deref()
+                .is_some_and(|id| quizzes.get(id).is_some())
+        })
+        .count();
+    let overall = live
+        .checked_mul(100)
+        .and_then(|n| n.checked_div(total))
+        .unwrap_or(0);
     html! {
         (DOCTYPE)
-        html lang="en" {
+        html lang="uk" {
             head {
                 meta charset="utf-8";
                 meta name="viewport" content="width=device-width, initial-scale=1";
-                title { "cram" }
+                title { (roadmap.title) }
                 link rel="stylesheet" href="/style.css";
             }
             body {
                 main .index {
-                    h1 { "cram" }
-                    @for (name, topics) in &sections {
-                        section .group {
-                            h2 { (name) }
-                            ul .topics {
-                                @for topic in topics {
-                                    li { (topic_link(topic)) }
-                                }
+                    h1 { (roadmap.title) }
+                    p .lead { (roadmap.lead) }
+                    div .prog {
+                        "Готово: " b { (live) } " / " b { (total) } " тем · опановуй по черзі."
+                    }
+                    div .mbar { div .mbar-fill style=(format!("width:{overall}%")) {} }
+                    @for section in &roadmap.sections {
+                        h2 .sec { (section.name) }
+                        div .grid {
+                            @for topic in &section.topics {
+                                (topic_card(topic, quizzes, totals))
                             }
                         }
                     }
+                    footer { (roadmap.footer) }
                 }
             }
         }
     }
 }
 
-/// One index entry: a card linking to the quiz with a mastery progress bar.
-fn topic_link(topic: &Topic<'_>) -> Markup {
-    html! {
-        a href=(format!("/quiz/{}", topic.id)) {
-            span .topic-head {
-                span .topic-name { (topic.title) }
-                span .topic-pct { (topic.percent) "%" }
+/// One roadmap card: a live topic links to its quiz and shows mastery; a
+/// planned topic is a dimmed, non-clickable tile.
+fn topic_card(topic: &Topic, quizzes: &Quizzes, totals: &HashMap<String, i64>) -> Markup {
+    let live = topic
+        .quiz
+        .as_deref()
+        .and_then(|id| quizzes.get(id).map(|quiz| (id, quiz)));
+    if let Some((id, quiz)) = live {
+        let count = i64::try_from(quiz.questions.len()).unwrap_or(0);
+        let capped = totals.get(id).copied().unwrap_or(0);
+        // Weighted mastery: capped streaks over count * HARD.
+        let pct = (capped * 100)
+            .checked_div(count * HARD)
+            .and_then(|p| u8::try_from(p).ok())
+            .unwrap_or(0);
+        html! {
+            a .card .done href=(format!("/quiz/{id}")) {
+                div .top {
+                    span .num { (topic.n) }
+                    span .badges {
+                        span .badge .prog .zero[pct == 0] .full[pct >= 100] {
+                            @if pct == 0 { "not started" }
+                            @else if pct >= 100 { "100% ✓" }
+                            @else { (pct) "% done" }
+                        }
+                    }
+                }
+                div .title { (topic.title) }
+                div .desc { (topic.desc) }
+                div .cardbar { div .cardbar-fill style=(format!("width:{pct}%")) {} }
             }
-            span .bar { span .bar-fill style=(format!("width:{}%", topic.percent)) {} }
+        }
+    } else {
+        html! {
+            div .card .todo {
+                div .top {
+                    span .num { (topic.n) }
+                    span .badges { span .badge .soon { "Planned" } }
+                }
+                div .title { (topic.title) }
+                div .desc { (topic.desc) }
+            }
         }
     }
 }
@@ -137,7 +165,7 @@ pub fn quiz_page(id: &str, quiz: &Quiz, streaks: &HashMap<u32, i64>) -> Markup {
                         div .rules { (PreEscaped(&quiz.rules)) }
                     }
                     @if rows.is_empty() {
-                        p .done { "All questions mastered." }
+                        p .finished { "All questions mastered." }
                     } @else {
                         @for row in &rows {
                             @if let Some(name) = row.heading {

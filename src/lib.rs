@@ -3,7 +3,7 @@
 mod config;
 mod db;
 mod error;
-mod quiz;
+mod models;
 mod render;
 mod route;
 
@@ -20,7 +20,10 @@ use tokio::net::TcpListener;
 use tower_http::{services::ServeDir, set_header::SetResponseHeaderLayer, trace::TraceLayer};
 use tracing_subscriber::EnvFilter;
 
-use crate::{config::Config, quiz::Quizzes};
+use crate::{
+    config::Config,
+    models::{quiz::Quizzes, roadmap::Roadmap},
+};
 
 pub use crate::error::Error;
 
@@ -29,6 +32,8 @@ pub use crate::error::Error;
 pub(crate) struct AppState {
     /// All quizzes, loaded once at startup.
     pub(crate) quizzes: Arc<Quizzes>,
+    /// Index roadmap, loaded once at startup.
+    pub(crate) roadmap: Arc<Roadmap>,
     /// Progress database pool.
     pub(crate) db: SqlitePool,
 }
@@ -53,10 +58,15 @@ pub async fn main() -> Result<Server, Error> {
 
     let quizzes = Arc::new(Quizzes::load(&config.quizzes_dir)?);
     tracing::info!("loaded {} quizzes", quizzes.iter().count());
-
+    let roadmap = Arc::new(Roadmap::load(&config.roadmap_file)?);
     let db = db::connect(&config.database_url).await?;
+
     tracing::info!("progress database ready at {}", config.database_url);
-    let state = AppState { quizzes, db };
+    let state = AppState {
+        quizzes,
+        roadmap,
+        db,
+    };
 
     // Disable caching so browsers always fetch the latest pages.
     let no_store = SetResponseHeaderLayer::overriding(

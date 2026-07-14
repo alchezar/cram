@@ -13,8 +13,6 @@ use crate::error::Error;
 pub struct Quiz {
     /// Human-readable topic name (English).
     pub title: String,
-    /// Group shown on the index page.
-    pub section: String,
     /// Interaction kind shared by every question.
     pub kind: Kind,
     /// Short intro shown above the questions.

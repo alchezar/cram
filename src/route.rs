@@ -53,7 +53,7 @@ async fn index(State(state): State<AppState>) -> AppResponse {
             tracing::error!("failed to load mastery totals: {e}");
             HashMap::new()
         });
-    AppResponse::Html(render::index_page(&state.quizzes, &totals))
+    AppResponse::Html(render::index_page(&state.roadmap, &state.quizzes, &totals))
 }
 
 // `GET /quiz/{id}`

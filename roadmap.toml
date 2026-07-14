@@ -1,0 +1,133 @@
+# Index roadmap: B2 grammar topics grouped into sections.
+# A topic with `quiz` is live (links to that quiz id); without it, it is "Planned".
+
+title  = "Англійська B2 - тренажери граматики"
+lead   = "Набір інтерактивних квізів під рівень FCE (B2). Тисни на готову тему, щоб почати тренування."
+footer = "Локальний сервер, офлайн. Прогрес зберігається в локальній базі."
+
+[[section]]
+name = "Tenses"
+
+  [[section.topic]]
+  n = 1
+  title = "Present & Past Simple/Continuous"
+  desc = "stative verbs, habit vs action now"
+  quiz = "present-past-basic"
+
+  [[section.topic]]
+  n = 2
+  title = "Present Perfect vs Past Simple"
+  desc = "+ Perfect Continuous, for/since/yet/already"
+
+  [[section.topic]]
+  n = 3
+  title = "Narrative tenses"
+  desc = "Past Perfect/Continuous for storytelling"
+
+  [[section.topic]]
+  n = 4
+  title = "Future forms"
+  desc = "will / going to / Present Cont. / Future Perfect"
+
+[[section]]
+name = "Modals"
+
+  [[section.topic]]
+  n = 5
+  title = "Modals 1: obligation & permission"
+  desc = "must / have to / should / be allowed to"
+
+  [[section.topic]]
+  n = 6
+  title = "Modals 2: deduction"
+  desc = "must be / can’t be / must have done"
+
+[[section]]
+name = "Conditionals & hypothetical"
+
+  [[section.topic]]
+  n = 7
+  title = "Conditionals 0-3"
+  desc = "zero, first, second, third; unless"
+
+  [[section.topic]]
+  n = 8
+  title = "Wish / if only / mixed"
+  desc = "wish + past/would, would rather"
+
+[[section]]
+name = "Passive"
+
+  [[section.topic]]
+  n = 9
+  title = "Passive voice"
+  desc = "all tenses, by/with"
+
+  [[section.topic]]
+  n = 10
+  title = "Passive reporting + causative"
+  desc = "It is said that… / have sth done"
+
+[[section]]
+name = "Clauses & structures"
+
+  [[section.topic]]
+  n = 11
+  title = "Reported speech"
+  desc = "statements, questions, commands, reporting verbs"
+
+  [[section.topic]]
+  n = 12
+  title = "Verb patterns (gerund / infinitive)"
+  desc = "-ing vs to-inf, sb+to do, bare form"
+  quiz = "verb-patterns-multi"
+
+  [[section.topic]]
+  n = 13
+  title = "Relative clauses"
+  desc = "defining / non-defining, reduced"
+
+[[section]]
+name = "Nouns, adjectives, adverbs"
+
+  [[section.topic]]
+  n = 14
+  title = "Articles & quantifiers"
+  desc = "a/an/the/zero; some/any/much/few"
+
+  [[section.topic]]
+  n = 15
+  title = "Comparatives & superlatives"
+  desc = "as…as, the more…the more"
+
+  [[section.topic]]
+  n = 16
+  title = "used to / be used to / get used to"
+  desc = "past habit vs being accustomed"
+
+[[section]]
+name = "Linking & smaller topics"
+
+  [[section.topic]]
+  n = 17
+  title = "Linking words"
+  desc = "although / despite / however / whereas"
+
+  [[section.topic]]
+  n = 18
+  title = "so/such/too/enough + tags + indirect Q"
+  desc = "smaller topics grouped"
+
+  [[section.topic]]
+  n = 19
+  title = "Word formation"
+  desc = "prefixes/suffixes (Use of English)"
+
+[[section]]
+name = "Vocabulary & collocations"
+
+  [[section.topic]]
+  n = 20
+  title = "Prepositions, idioms & phrasal verbs"
+  desc = "100+ dependent prepositions, idioms, phrasal verbs"
+  quiz = "collocations-trainer-100"
