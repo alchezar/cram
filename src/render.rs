@@ -192,7 +192,7 @@ fn question(id: &str, kind: Kind, q: &Question, streak: i64) -> Markup {
     let action = format!("/quiz/{id}/check/{}", q.id);
     html! {
         section .question data-qid=(q.id) {
-            p .prompt { (q.prompt) " " (stars(streak)) }
+            p .prompt { (q.prompt) " " span id=(format!("stars-{}", q.id)) { (stars(streak)) } }
             form .answer-form hx-post=(action) hx-target="find .result" hx-swap="innerHTML" {
                 div .options {
                     @match kind {
@@ -240,6 +240,8 @@ pub fn result(kind: Kind, q: &Question, correct: bool, streak: i64) -> Markup {
                 p .mastered { "Mastered - it leaves the quiz on reload." }
             }
         }
+        // Out-of-band swap: refresh the stars shown next to the prompt too.
+        span id=(format!("stars-{}", q.id)) hx-swap-oob="true" { (stars(streak)) }
     }
 }
 
