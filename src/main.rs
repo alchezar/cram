@@ -1,7 +1,5 @@
 //! cram binary: wires the server's outward behavior (browser, keep-awake, shutdown).
 
-use std::process::Command;
-
 use keepawake::{Builder, KeepAwake};
 use tokio::signal;
 
@@ -17,8 +15,9 @@ async fn main() -> Result<(), Error> {
     let _awake = keep_awake();
 
     if OPEN_BROWSER {
-        let addr = server.local_addr()?;
-        open_browser(&format!("http://localhost:{}", addr.port()));
+        open::that(format!("http://localhost:{}", server.local_addr()?.port()))
+            .inspect_err(|err| tracing::warn!("could not open browser: {err}"))
+            .ok();
     }
 
     server.with_graceful_shutdown(shutdown_signal()).await?;
@@ -43,22 +42,4 @@ fn keep_awake() -> Option<KeepAwake> {
         .create()
         .inspect_err(|e| tracing::warn!("could not prevent sleep: {e}"))
         .ok()
-}
-
-/// Best-effort: open `url` in the system's default browser (dev convenience).
-/// Any failure is logged and ignored - the server runs regardless.
-fn open_browser(url: &str) {
-    // Pick the platform's URL opener; every branch compiles on every target.
-    let mut command = if cfg!(target_os = "windows") {
-        let mut cmd = Command::new("cmd");
-        cmd.args(["/C", "start", ""]);
-        cmd
-    } else if cfg!(target_os = "macos") {
-        Command::new("open")
-    } else {
-        Command::new("xdg-open")
-    };
-    if let Err(e) = command.arg(url).status() {
-        tracing::warn!("could not open browser: {e}");
-    }
 }
