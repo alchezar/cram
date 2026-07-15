@@ -26,7 +26,7 @@ async fn main() -> Result<(), Error> {
 
 /// Wait for Ctrl-C to trigger a clean shutdown.
 async fn shutdown_signal() {
-    let _ = signal::ctrl_c().await;
+    signal::ctrl_c().await.ok();
     tracing::info!("shutting down");
 }
 

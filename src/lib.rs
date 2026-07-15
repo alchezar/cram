@@ -27,6 +27,11 @@ use crate::{
 
 pub use crate::error::Error;
 
+/// Log filter used when `RUST_LOG` is unset: our own events down to debug, and
+/// only info and worse from the dependencies (sqlx logs every query at debug,
+/// tower-http every request, axum every connection at trace).
+const DEFAULT_LOG: &str = "info,cram=debug";
+
 /// Shared application state passed to every handler.
 #[derive(Clone, Debug)]
 pub(crate) struct AppState {
@@ -50,7 +55,7 @@ type Server = Serve<TcpListener, Router, Router>;
 pub async fn main() -> Result<Server, Error> {
     tracing_subscriber::fmt()
         .with_env_filter(
-            EnvFilter::try_from_default_env().unwrap_or_else(|_| EnvFilter::new("info")),
+            EnvFilter::try_from_default_env().unwrap_or_else(|_| EnvFilter::new(DEFAULT_LOG)),
         )
         .init();
 

@@ -13,7 +13,12 @@ use axum_extra::extract::Form;
 use maud::Markup;
 use serde::Deserialize;
 
-use crate::{AppState, db::progress, render};
+use crate::{
+    AppState,
+    db::{LOCAL_USER, progress},
+    models::quiz::{Kind, Question},
+    render,
+};
 
 /// Build the application router with all routes and shared state.
 pub fn router(state: AppState) -> Router {
@@ -94,6 +99,14 @@ async fn check(
         return AppResponse::NotFound("unknown question");
     };
     let correct = question.is_correct(quiz.kind, &answer.opt, &answer.answer);
+    tracing::trace!(
+        user = LOCAL_USER,
+        quiz = id,
+        question = qid,
+        answer = %describe(quiz.kind, question, &answer),
+        correct,
+        "answer checked"
+    );
     let streak = progress::record(&state.db, &id, qid, correct)
         .await
         .unwrap_or_else(|e| {
@@ -101,6 +114,27 @@ async fn check(
             i64::from(correct)
         });
     AppResponse::Html(render::result(quiz.kind, question, correct, streak))
+}
+
+/// A submitted answer in a readable form for logs: the typed text, or the
+/// picked options as `#index "text"` (an index the question does not have shows
+/// as `#index ?`).
+fn describe(kind: Kind, question: &Question, answer: &Answer) -> String {
+    match kind {
+        Kind::Text => format!("{:?}", answer.answer.trim()),
+        Kind::Multi | Kind::Single if answer.opt.is_empty() => "nothing".to_owned(),
+        Kind::Multi | Kind::Single => answer
+            .opt
+            .iter()
+            .map(|&i| {
+                question
+                    .options
+                    .get(i)
+                    .map_or_else(|| format!("#{i} ?"), |o| format!("#{i} {:?}", o.text))
+            })
+            .collect::<Vec<_>>()
+            .join(", "),
+    }
 }
 
 // `POST /quiz/{id}/reset`
